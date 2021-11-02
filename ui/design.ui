@@ -7,8 +7,14 @@
     <x>0</x>
     <y>0</y>
     <width>1095</width>
-    <height>490</height>
+    <height>818</height>
    </rect>
+  </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
   </property>
   <property name="contextMenuPolicy">
    <enum>Qt::DefaultContextMenu</enum>
@@ -326,11 +332,8 @@ font: 12px url(:/fonts/roboto_regular.ttf);
         <layout class="QVBoxLayout" name="verticalLayout_3">
          <item>
           <widget class="QListWidget" name="productsList">
-           <property name="sizePolicy">
-            <sizepolicy hsizetype="Ignored" vsizetype="Ignored">
-             <horstretch>0</horstretch>
-             <verstretch>0</verstretch>
-            </sizepolicy>
+           <property name="sizeAdjustPolicy">
+            <enum>QAbstractScrollArea::AdjustToContents</enum>
            </property>
           </widget>
          </item>
@@ -424,7 +427,7 @@ font: 12px url(:/fonts/roboto_regular.ttf);
      <x>0</x>
      <y>0</y>
      <width>1095</width>
-     <height>25</height>
+     <height>21</height>
     </rect>
    </property>
    <widget class="QMenu" name="settingsMenu">
@@ -442,7 +445,7 @@ font: 12px url(:/fonts/roboto_regular.ttf);
   </action>
  </widget>
  <resources>
-  <include location="../../../Документы/pyMoySklad/ui/resources.qrc"/>
+  <include location="resources.qrc"/>
  </resources>
  <connections>
   <connection>

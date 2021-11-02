@@ -8,6 +8,7 @@ class ProductSystem:
         self.products = []
 
     def load(self):
-        with open('products.json', 'r', encoding='utf-8') as f:
-            for product in json.load(f):
-                self.products.append(from_dict(data_class=Product, data=product))
+        # with open('products.json', 'r', encoding='utf-8') as f:
+        #     for product in json.load(f):
+        #         self.products.append(from_dict(data_class=Product, data=product))
+        pass
