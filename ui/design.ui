@@ -1,0 +1,468 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>mainWindow</class>
+ <widget class="QMainWindow" name="mainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1095</width>
+    <height>490</height>
+   </rect>
+  </property>
+  <property name="contextMenuPolicy">
+   <enum>Qt::DefaultContextMenu</enum>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <property name="autoFillBackground">
+   <bool>true</bool>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">Qlabel {
+font: 12px url(:/fonts/roboto_regular.ttf);
+}</string>
+  </property>
+  <property name="tabShape">
+   <enum>QTabWidget::Triangular</enum>
+  </property>
+  <property name="dockOptions">
+   <set>QMainWindow::AllowNestedDocks|QMainWindow::AllowTabbedDocks|QMainWindow::AnimatedDocks</set>
+  </property>
+  <widget class="QWidget" name="mainWidget">
+   <property name="autoFillBackground">
+    <bool>true</bool>
+   </property>
+   <layout class="QHBoxLayout" name="horizontalLayout">
+    <item>
+     <widget class="QStackedWidget" name="mainStackedWidget">
+      <property name="palette">
+       <palette>
+        <active/>
+        <inactive/>
+        <disabled/>
+       </palette>
+      </property>
+      <property name="autoFillBackground">
+       <bool>true</bool>
+      </property>
+      <property name="frameShape">
+       <enum>QFrame::Box</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Raised</enum>
+      </property>
+      <property name="currentIndex">
+       <number>0</number>
+      </property>
+      <widget class="QWidget" name="sellPage">
+       <property name="autoFillBackground">
+        <bool>true</bool>
+       </property>
+       <layout class="QVBoxLayout" name="verticalLayout">
+        <item>
+         <layout class="QHBoxLayout" name="receiptHeaderHorizontalLayout">
+          <item>
+           <widget class="QPushButton" name="receiptHeaderDelete">
+            <property name="minimumSize">
+             <size>
+              <width>41</width>
+              <height>41</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>41</width>
+              <height>41</height>
+             </size>
+            </property>
+            <property name="baseSize">
+             <size>
+              <width>41</width>
+              <height>41</height>
+             </size>
+            </property>
+            <property name="cursor">
+             <cursorShape>ArrowCursor</cursorShape>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+            <property name="icon">
+             <iconset>
+              <normalon>:/icons/delete.svg</normalon>
+             </iconset>
+            </property>
+            <property name="iconSize">
+             <size>
+              <width>31</width>
+              <height>31</height>
+             </size>
+            </property>
+            <property name="checkable">
+             <bool>false</bool>
+            </property>
+            <property name="autoDefault">
+             <bool>false</bool>
+            </property>
+            <property name="flat">
+             <bool>false</bool>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="receiptHeaderLabel">
+            <property name="text">
+             <string>Чек</string>
+            </property>
+            <property name="textFormat">
+             <enum>Qt::PlainText</enum>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="receiptHeaderDescription">
+            <property name="minimumSize">
+             <size>
+              <width>41</width>
+              <height>41</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>41</width>
+              <height>41</height>
+             </size>
+            </property>
+            <property name="baseSize">
+             <size>
+              <width>41</width>
+              <height>41</height>
+             </size>
+            </property>
+            <property name="cursor">
+             <cursorShape>ArrowCursor</cursorShape>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+            <property name="icon">
+             <iconset>
+              <normalon>:/icons/message.svg</normalon>
+             </iconset>
+            </property>
+            <property name="iconSize">
+             <size>
+              <width>31</width>
+              <height>31</height>
+             </size>
+            </property>
+            <property name="checkable">
+             <bool>false</bool>
+            </property>
+            <property name="autoDefault">
+             <bool>false</bool>
+            </property>
+            <property name="flat">
+             <bool>false</bool>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <widget class="QListWidget" name="receiptMainWidget">
+          <property name="minimumSize">
+           <size>
+            <width>600</width>
+            <height>0</height>
+           </size>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="receiptTotal">
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>41</height>
+           </size>
+          </property>
+          <property name="text">
+           <string>Итого</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="settingsPluginsPage">
+       <layout class="QHBoxLayout" name="horizontalLayout_3">
+        <item>
+         <layout class="QVBoxLayout" name="settingsPluginsListVerticalLayout">
+          <item>
+           <layout class="QHBoxLayout" name="settingsPluginsListHeaderHorizontalLayout">
+            <item>
+             <widget class="QPushButton" name="settingsPluginsListBack">
+              <property name="text">
+               <string>Назад</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <spacer name="settingsPluginsListHeaderSpacer">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>258</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <widget class="QListView" name="settingsPluginsList"/>
+          </item>
+          <item>
+           <widget class="QPushButton" name="settingsPluginsListReload">
+            <property name="text">
+             <string>Перезагрузить плагин</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <widget class="QLabel" name="settingsPluginsInfo">
+          <property name="minimumSize">
+           <size>
+            <width>200</width>
+            <height>0</height>
+           </size>
+          </property>
+          <property name="text">
+           <string>TextLabel</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QDockWidget" name="productsDock">
+   <property name="sizePolicy">
+    <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+     <horstretch>0</horstretch>
+     <verstretch>0</verstretch>
+    </sizepolicy>
+   </property>
+   <property name="minimumSize">
+    <size>
+     <width>268</width>
+     <height>352</height>
+    </size>
+   </property>
+   <property name="autoFillBackground">
+    <bool>false</bool>
+   </property>
+   <property name="features">
+    <set>QDockWidget::DockWidgetFloatable|QDockWidget::DockWidgetMovable</set>
+   </property>
+   <property name="allowedAreas">
+    <set>Qt::BottomDockWidgetArea|Qt::LeftDockWidgetArea|Qt::RightDockWidgetArea</set>
+   </property>
+   <property name="windowTitle">
+    <string>Все товары</string>
+   </property>
+   <attribute name="dockWidgetArea">
+    <number>1</number>
+   </attribute>
+   <widget class="QWidget" name="productsDockContent">
+    <layout class="QVBoxLayout" name="verticalLayout_2">
+     <item>
+      <layout class="QHBoxLayout" name="productsDockHeaderHorizontalLayout">
+       <item>
+        <widget class="QLineEdit" name="productsDockHeaderSearch">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>41</height>
+          </size>
+         </property>
+         <property name="inputMask">
+          <string comment="Поиск по товарам..."/>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+         <property name="maxLength">
+          <number>32767</number>
+         </property>
+         <property name="placeholderText">
+          <string>Поиск по товарам...</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+     <item>
+      <widget class="QStackedWidget" name="productsDockProductsStacked">
+       <property name="currentIndex">
+        <number>0</number>
+       </property>
+       <widget class="QWidget" name="productsDockProductsStackedList">
+        <layout class="QVBoxLayout" name="verticalLayout_3">
+         <item>
+          <widget class="QListWidget" name="productsList">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Ignored" vsizetype="Ignored">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+       <widget class="QWidget" name="productsDockProductsStackedFavorite">
+        <layout class="QVBoxLayout" name="verticalLayout_4">
+         <item>
+          <widget class="QListWidget" name="favoriteProductsList"/>
+         </item>
+        </layout>
+       </widget>
+      </widget>
+     </item>
+     <item>
+      <layout class="QHBoxLayout" name="productsDockBottomHorizontalLayout">
+       <item>
+        <widget class="QPushButton" name="productsDockBottomFavorite">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>41</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>16777215</width>
+           <height>41</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>Избранные</string>
+         </property>
+         <property name="icon">
+          <iconset>
+           <normalon>:/icons/favorite.svg</normalon>
+          </iconset>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>21</width>
+           <height>21</height>
+          </size>
+         </property>
+         <attribute name="buttonGroup">
+          <string notr="true">productsDockType</string>
+         </attribute>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="productsDockBottomList">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>41</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>16777215</width>
+           <height>41</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>Список</string>
+         </property>
+         <property name="icon">
+          <iconset>
+           <normalon>:/icons/list.svg</normalon>
+          </iconset>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>21</width>
+           <height>21</height>
+          </size>
+         </property>
+         <attribute name="buttonGroup">
+          <string notr="true">productsDockType</string>
+         </attribute>
+        </widget>
+       </item>
+      </layout>
+     </item>
+    </layout>
+   </widget>
+  </widget>
+  <widget class="QMenuBar" name="menuBar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>1095</width>
+     <height>25</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="settingsMenu">
+    <property name="title">
+     <string>Настройки</string>
+    </property>
+    <addaction name="settingsPlugins"/>
+   </widget>
+   <addaction name="settingsMenu"/>
+  </widget>
+  <action name="settingsPlugins">
+   <property name="text">
+    <string>Плагины</string>
+   </property>
+  </action>
+ </widget>
+ <resources>
+  <include location="../../../Документы/pyMoySklad/ui/resources.qrc"/>
+ </resources>
+ <connections>
+  <connection>
+   <sender>productsDockType</sender>
+   <signal>buttonClicked(int)</signal>
+   <receiver>productsDockProductsStacked</receiver>
+   <slot>setCurrentIndex(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>133</x>
+     <y>329</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <buttongroups>
+  <buttongroup name="productsDockType"/>
+ </buttongroups>
+</ui>

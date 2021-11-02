@@ -1,0 +1,6 @@
+{
+  "name": "Example Plugin",
+  "description": "Пример плагина",
+  "version": "0.0.01-rc5",
+  "enabled": true
+}

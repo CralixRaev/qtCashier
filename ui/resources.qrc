@@ -1,0 +1,9 @@
+<RCC>
+  <qresource>
+    <file>icons/delete.svg</file>
+    <file>icons/favorite.svg</file>
+    <file>icons/list.svg</file>
+    <file>icons/menu.svg</file>
+    <file>icons/message.svg</file>
+  </qresource>
+</RCC>
