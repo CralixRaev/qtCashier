@@ -21,7 +21,7 @@ class MainWindow(QtWidgets.QMainWindow):
         with open('config.json', 'r', encoding='utf-8') as f:
             self.config = json.load(f)
         self.modules = {}
-        self.opened_classes = {}
+        self.opened_elems = {}
         # я не думаю что мы будем запускаться откуда то кроме самого main.py, поэтому такое
         # решение подойдёт
         path = os.getcwd()
@@ -30,11 +30,8 @@ class MainWindow(QtWidgets.QMainWindow):
             if app_module not in ['__pycache__', 'ABC']:
                 module = importlib.import_module(f'app_modules.{app_module}.uiLogic')
                 self.modules[app_module] = module.UiLogic(self)
-                self.opened_classes = self.opened_classes | self.modules[
-                    app_module].get_opened_classes()
 
         for name, module in self.modules.items():
-            module.set_opened_classes(self.opened_classes)
             module.load()
 
 

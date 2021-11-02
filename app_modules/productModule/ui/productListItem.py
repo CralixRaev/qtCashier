@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'C:\Users\Cralix\Desktop\qtCashier\app_modules\productListModule\ui/productListItem.ui'
+# Form implementation generated from reading ui file 'C:\Users\Cralix\Desktop\qtCashier\app_modules\productModule\ui/productListItem.ui'
 #
 # Created by: PyQt5 UI code generator 5.15.6
 #

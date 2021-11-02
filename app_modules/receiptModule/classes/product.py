@@ -1,4 +1,4 @@
-from app_modules.productListModule.classes.product import Product
+from app_modules.productModule.classes.product import Product
 from dataclasses import dataclass, field
 
 

@@ -3,7 +3,7 @@ from ui.design import Ui_mainWindow
 
 class MainWindow:
     def __init__(self):
-        self.opened_classes = {}
+        self.opened_elems = {}
         self.modules = {}
         self.ui = Ui_mainWindow()
         self.ui.setupUi(self)

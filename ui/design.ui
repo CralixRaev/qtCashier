@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>1123</width>
-    <height>730</height>
+    <height>587</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -70,7 +70,7 @@ font: 12px url(:/fonts/roboto_regular.ttf);
        <number>0</number>
       </property>
       <property name="currentIndex">
-       <number>0</number>
+       <number>1</number>
       </property>
       <widget class="QWidget" name="sellPage">
        <property name="sizePolicy">
@@ -93,7 +93,7 @@ font: 12px url(:/fonts/roboto_regular.ttf);
           </property>
          </widget>
         </item>
-        <item row="2" column="2">
+        <item row="3" column="2">
          <widget class="QPushButton" name="receiptTotal">
           <property name="minimumSize">
            <size>
@@ -102,7 +102,7 @@ font: 12px url(:/fonts/roboto_regular.ttf);
            </size>
           </property>
           <property name="text">
-           <string>Итого</string>
+           <string>Пробить чек</string>
           </property>
          </widget>
         </item>
@@ -219,7 +219,14 @@ font: 12px url(:/fonts/roboto_regular.ttf);
           </item>
          </layout>
         </item>
-        <item row="0" column="0" rowspan="3">
+        <item row="2" column="2">
+         <widget class="QLabel" name="label">
+          <property name="text">
+           <string>Итого: 999 999.00</string>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="0" rowspan="4">
          <widget class="QTabWidget" name="productsTabWidget">
           <property name="sizePolicy">
            <sizepolicy hsizetype="MinimumExpanding" vsizetype="Preferred">
@@ -290,8 +297,31 @@ font: 12px url(:/fonts/roboto_regular.ttf);
        </layout>
       </widget>
       <widget class="QWidget" name="settingsPluginsPage">
-       <layout class="QHBoxLayout" name="horizontalLayout_3">
-        <item>
+       <layout class="QGridLayout" name="gridLayout_3">
+        <item row="0" column="1" colspan="2">
+         <widget class="QLabel" name="settingsPluginsInfo">
+          <property name="minimumSize">
+           <size>
+            <width>200</width>
+            <height>0</height>
+           </size>
+          </property>
+          <property name="text">
+           <string>TextLabel</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="1" colspan="2">
+         <widget class="QCheckBox" name="checkBox">
+          <property name="text">
+           <string>Включить/выключить плагин</string>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="0" rowspan="2">
          <layout class="QVBoxLayout" name="settingsPluginsListVerticalLayout">
           <item>
            <layout class="QHBoxLayout" name="settingsPluginsListHeaderHorizontalLayout">
@@ -329,21 +359,40 @@ font: 12px url(:/fonts/roboto_regular.ttf);
           </item>
          </layout>
         </item>
-        <item>
-         <widget class="QLabel" name="settingsPluginsInfo">
-          <property name="minimumSize">
-           <size>
-            <width>200</width>
-            <height>0</height>
-           </size>
-          </property>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="productManagePage">
+       <layout class="QGridLayout" name="gridLayout_2">
+        <item row="0" column="0" colspan="2">
+         <widget class="QLabel" name="productManageLabel">
           <property name="text">
-           <string>TextLabel</string>
-          </property>
-          <property name="alignment">
-           <set>Qt::AlignCenter</set>
+           <string>Список всех товаров:</string>
           </property>
          </widget>
+        </item>
+        <item row="2" column="0">
+         <widget class="QPushButton" name="productManageAddProduct">
+          <property name="text">
+           <string>Добавить товар</string>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="1">
+         <widget class="QPushButton" name="productManageEditProduct">
+          <property name="text">
+           <string>Редактировать товар</string>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="2">
+         <widget class="QPushButton" name="productManageRemoveProduct">
+          <property name="text">
+           <string>Удалить товар</string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="0" colspan="3">
+         <widget class="QListWidget" name="productManageList"/>
         </item>
        </layout>
       </widget>
@@ -365,12 +414,19 @@ font: 12px url(:/fonts/roboto_regular.ttf);
      <string>Настройки</string>
     </property>
     <addaction name="settingsPlugins"/>
+    <addaction name="separator"/>
+    <addaction name="action_2"/>
    </widget>
    <addaction name="settingsMenu"/>
   </widget>
   <action name="settingsPlugins">
    <property name="text">
     <string>Плагины</string>
+   </property>
+  </action>
+  <action name="action_2">
+   <property name="text">
+    <string>Управление товарами</string>
    </property>
   </action>
  </widget>
