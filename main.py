@@ -36,7 +36,7 @@ class MainWindow(QtWidgets.QMainWindow):
 
 if __name__ == "__main__":
     app = QtWidgets.QApplication(sys.argv)
-    apply_stylesheet(app, theme='light_blue.xml', invert_secondary=False,
+    apply_stylesheet(app, theme='dark_blue.xml', invert_secondary=False,
                      extra={'font-family': 'Roboto'})
     window = MainWindow()
     window.show()
