@@ -20,7 +20,11 @@
    <enum>Qt::DefaultContextMenu</enum>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>Касса</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="resources.qrc">
+    <normaloff>:/icons/window-icon.svg</normaloff>:/icons/window-icon.svg</iconset>
   </property>
   <property name="autoFillBackground">
    <bool>true</bool>
@@ -258,7 +262,17 @@ font: 12px url(:/fonts/roboto_regular.ttf);
              </widget>
             </item>
             <item>
-             <widget class="QListWidget" name="allProductsList"/>
+             <widget class="QListWidget" name="allProductsList">
+              <property name="verticalScrollBarPolicy">
+               <enum>Qt::ScrollBarAsNeeded</enum>
+              </property>
+              <property name="sizeAdjustPolicy">
+               <enum>QAbstractScrollArea::AdjustToContents</enum>
+              </property>
+              <property name="movement">
+               <enum>QListView::Free</enum>
+              </property>
+             </widget>
             </item>
            </layout>
           </widget>
