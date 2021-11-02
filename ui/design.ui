@@ -70,7 +70,7 @@ font: 12px url(:/fonts/roboto_regular.ttf);
        <number>0</number>
       </property>
       <property name="currentIndex">
-       <number>1</number>
+       <number>0</number>
       </property>
       <widget class="QWidget" name="sellPage">
        <property name="sizePolicy">
@@ -363,36 +363,88 @@ font: 12px url(:/fonts/roboto_regular.ttf);
       </widget>
       <widget class="QWidget" name="productManagePage">
        <layout class="QGridLayout" name="gridLayout_2">
-        <item row="0" column="0" colspan="2">
+        <item row="1" column="1" colspan="2">
          <widget class="QLabel" name="productManageLabel">
           <property name="text">
            <string>Список всех товаров:</string>
           </property>
          </widget>
         </item>
-        <item row="2" column="0">
+        <item row="3" column="1">
          <widget class="QPushButton" name="productManageAddProduct">
           <property name="text">
            <string>Добавить товар</string>
           </property>
          </widget>
         </item>
-        <item row="2" column="1">
+        <item row="3" column="2">
          <widget class="QPushButton" name="productManageEditProduct">
           <property name="text">
            <string>Редактировать товар</string>
           </property>
          </widget>
         </item>
-        <item row="2" column="2">
+        <item row="2" column="1" colspan="3">
+         <widget class="QListWidget" name="productManageList"/>
+        </item>
+        <item row="3" column="3">
          <widget class="QPushButton" name="productManageRemoveProduct">
           <property name="text">
            <string>Удалить товар</string>
           </property>
          </widget>
         </item>
-        <item row="1" column="0" colspan="3">
-         <widget class="QListWidget" name="productManageList"/>
+        <item row="0" column="1">
+         <widget class="QPushButton" name="productManageBack">
+          <property name="text">
+           <string>Назад</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="receiptListPage">
+       <layout class="QGridLayout" name="gridLayout_4">
+        <item row="3" column="0" colspan="2">
+         <widget class="QListWidget" name="listWidget"/>
+        </item>
+        <item row="4" column="1">
+         <widget class="QPushButton" name="pushButton">
+          <property name="text">
+           <string>Экспорт чеков в CSV</string>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="0">
+         <widget class="QLabel" name="label_2">
+          <property name="text">
+           <string>Все пробитые чеки:</string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="0" colspan="2">
+         <layout class="QFormLayout" name="formLayout">
+          <item row="0" column="1">
+           <widget class="QDateTimeEdit" name="dateTimeEdit"/>
+          </item>
+          <item row="1" column="1">
+           <widget class="QDateTimeEdit" name="dateTimeEdit_2"/>
+          </item>
+          <item row="0" column="0">
+           <widget class="QLabel" name="label_3">
+            <property name="text">
+             <string>С даты/времени:</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="0">
+           <widget class="QLabel" name="label_4">
+            <property name="text">
+             <string>До даты/времени:</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
         </item>
        </layout>
       </widget>
@@ -415,7 +467,7 @@ font: 12px url(:/fonts/roboto_regular.ttf);
     </property>
     <addaction name="settingsPlugins"/>
     <addaction name="separator"/>
-    <addaction name="action_2"/>
+    <addaction name="productManage"/>
    </widget>
    <addaction name="settingsMenu"/>
   </widget>
@@ -424,7 +476,7 @@ font: 12px url(:/fonts/roboto_regular.ttf);
     <string>Плагины</string>
    </property>
   </action>
-  <action name="action_2">
+  <action name="productManage">
    <property name="text">
     <string>Управление товарами</string>
    </property>

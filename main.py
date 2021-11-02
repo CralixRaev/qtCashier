@@ -3,6 +3,8 @@ import os
 import sys
 
 from PyQt5 import QtWidgets, QtGui
+from PyQt5.QtWidgets import QErrorMessage
+
 import resources_rc
 from ui.design import Ui_mainWindow
 from qt_material import apply_stylesheet
@@ -34,6 +36,9 @@ class MainWindow(QtWidgets.QMainWindow):
         for name, module in self.modules.items():
             module.load()
 
+    def except_hook(self, cls, exception, traceback):
+        QErrorMessage(self).showMessage(str(exception) + str(traceback))
+
 
 if __name__ == "__main__":
     app = QtWidgets.QApplication(sys.argv)
@@ -41,5 +46,5 @@ if __name__ == "__main__":
                      extra={'font-family': 'Roboto'})
     window = MainWindow()
     window.show()
-
+    sys.excepthook = window.except_hook
     sys.exit(app.exec())

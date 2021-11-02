@@ -1,12 +1,14 @@
-class EditForm()
+from PyQt5.QtWidgets import QWidget
 
-def __init__(self, *args):
-    super().__init__()
-    self.initUI(args)
+from .productEdit import Ui_mainWidget
 
 
-def initUI(self, args):
-    self.setGeometry(300, 300, 300, 300)
-    self.setWindowTitle('Вторая форма')
-    self.lbl = QLabel(args[-1], self)
-    self.lbl.adjustSize()
+# конечно, это было намного удобнее сделать диалогом, но лицей так не хочет, поэтому отдельная
+# формочка, ок
+
+class EditForm(QWidget):
+    def __init__(self, clicked_item):
+        super().__init__()
+        self.ui = Ui_mainWidget()
+        self.ui.setupUi(self)
+        self.setWindowTitle(f"Редактирование товара | {clicked_item.productName.text()}")

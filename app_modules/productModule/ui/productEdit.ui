@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>mainWindow</class>
- <widget class="QMainWindow" name="mainWindow">
+ <class>mainWidget</class>
+ <widget class="QWidget" name="mainWidget">
   <property name="windowModality">
    <enum>Qt::ApplicationModal</enum>
   </property>
@@ -20,149 +20,143 @@
    <iconset resource="../../../ui/resources.qrc">
     <normaloff>:/icons/window-icon.svg</normaloff>:/icons/window-icon.svg</iconset>
   </property>
-  <widget class="QWidget" name="centralWidget">
-   <layout class="QGridLayout" name="gridLayout">
-    <property name="horizontalSpacing">
-     <number>24</number>
-    </property>
-    <item row="0" column="1">
-     <layout class="QFormLayout" name="formLayout">
-      <property name="fieldGrowthPolicy">
-       <enum>QFormLayout::AllNonFixedFieldsGrow</enum>
+  <layout class="QGridLayout" name="gridLayout">
+   <item row="1" column="1">
+    <layout class="QFormLayout" name="formLayout">
+     <property name="fieldGrowthPolicy">
+      <enum>QFormLayout::AllNonFixedFieldsGrow</enum>
+     </property>
+     <property name="rowWrapPolicy">
+      <enum>QFormLayout::DontWrapRows</enum>
+     </property>
+     <property name="labelAlignment">
+      <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+     </property>
+     <property name="formAlignment">
+      <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+     </property>
+     <property name="verticalSpacing">
+      <number>12</number>
+     </property>
+     <property name="rightMargin">
+      <number>0</number>
+     </property>
+     <item row="0" column="0">
+      <widget class="QLabel" name="formNameLabel">
+       <property name="text">
+        <string>Наименование товара</string>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="1">
+      <widget class="QLineEdit" name="formNameEdit">
+       <property name="placeholderText">
+        <string>Введите название товара...</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="0">
+      <widget class="QLabel" name="formPriceLabel">
+       <property name="text">
+        <string>Цена товара</string>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="0">
+      <widget class="QLabel" name="formImageLabel">
+       <property name="text">
+        <string>Изображение</string>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="1">
+      <widget class="QPushButton" name="formUploadImage">
+       <property name="text">
+        <string>Загрузить новое изображение</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="1">
+      <widget class="QDoubleSpinBox" name="formPriceEdit"/>
+     </item>
+     <item row="3" column="0">
+      <widget class="QLabel" name="label_3">
+       <property name="text">
+        <string>Товар в избранном?</string>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="1">
+      <widget class="QCheckBox" name="checkBox">
+       <property name="text">
+        <string>В избранном</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item row="1" column="2" rowspan="3">
+    <widget class="QLabel" name="imageLabel">
+     <property name="minimumSize">
+      <size>
+       <width>256</width>
+       <height>256</height>
+      </size>
+     </property>
+     <property name="text">
+      <string>Картинка</string>
+     </property>
+    </widget>
+   </item>
+   <item row="2" column="1">
+    <widget class="QLabel" name="label">
+     <property name="text">
+      <string>Редактирование штрихкодов:</string>
+     </property>
+    </widget>
+   </item>
+   <item row="3" column="1">
+    <widget class="QListWidget" name="listWidget">
+     <item>
+      <property name="text">
+       <string>978020137962</string>
       </property>
-      <property name="rowWrapPolicy">
-       <enum>QFormLayout::DontWrapRows</enum>
-      </property>
-      <property name="labelAlignment">
-       <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
-      </property>
-      <property name="formAlignment">
-       <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
-      </property>
-      <property name="verticalSpacing">
-       <number>12</number>
-      </property>
-      <property name="rightMargin">
-       <number>0</number>
-      </property>
-      <item row="0" column="0">
-       <widget class="QLabel" name="formNameLabel">
-        <property name="text">
-         <string>Наименование товара</string>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="1">
-       <widget class="QLineEdit" name="formNameEdit">
-        <property name="placeholderText">
-         <string>Введите название товара...</string>
-        </property>
-       </widget>
-      </item>
-      <item row="1" column="0">
-       <widget class="QLabel" name="formPriceLabel">
-        <property name="text">
-         <string>Цена товара</string>
-        </property>
-       </widget>
-      </item>
-      <item row="2" column="0">
-       <widget class="QLabel" name="formImageLabel">
-        <property name="text">
-         <string>Изображение</string>
-        </property>
-       </widget>
-      </item>
-      <item row="2" column="1">
-       <widget class="QPushButton" name="formUploadImage">
-        <property name="text">
-         <string>Загрузить новое изображение</string>
-        </property>
-       </widget>
-      </item>
-      <item row="1" column="1">
-       <widget class="QDoubleSpinBox" name="formPriceEdit"/>
-      </item>
-      <item row="3" column="0">
-       <widget class="QLabel" name="label_3">
-        <property name="text">
-         <string>Товар в избранном?</string>
-        </property>
-       </widget>
-      </item>
-      <item row="3" column="1">
-       <widget class="QCheckBox" name="checkBox">
-        <property name="text">
-         <string>В избранном</string>
-        </property>
-       </widget>
-      </item>
-     </layout>
-    </item>
-    <item row="2" column="1">
-     <widget class="QListWidget" name="listWidget">
-      <item>
+     </item>
+    </widget>
+   </item>
+   <item row="4" column="1">
+    <layout class="QFormLayout" name="formLayout_2">
+     <item row="0" column="0">
+      <widget class="QLabel" name="label_2">
+       <property name="text">
+        <string>Выбранный штрихкод:</string>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="1">
+      <widget class="QLineEdit" name="lineEdit">
        <property name="text">
         <string>978020137962</string>
        </property>
-      </item>
-     </widget>
-    </item>
-    <item row="1" column="1">
-     <widget class="QLabel" name="label">
-      <property name="text">
-       <string>Редактирование штрихкодов:</string>
-      </property>
-     </widget>
-    </item>
-    <item row="3" column="1">
-     <layout class="QFormLayout" name="formLayout_2">
-      <item row="0" column="0">
-       <widget class="QLabel" name="label_2">
-        <property name="text">
-         <string>Выбранный штрихкод:</string>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="1">
-       <widget class="QLineEdit" name="lineEdit">
-        <property name="text">
-         <string>978020137962</string>
-        </property>
-       </widget>
-      </item>
-     </layout>
-    </item>
-    <item row="0" column="2" rowspan="7">
-     <widget class="QLabel" name="imageLabel">
-      <property name="minimumSize">
-       <size>
-        <width>256</width>
-        <height>256</height>
-       </size>
-      </property>
-      <property name="text">
-       <string>Картинка</string>
-      </property>
-     </widget>
-    </item>
-    <item row="7" column="2">
-     <widget class="QPushButton" name="pushButton_2">
-      <property name="text">
-       <string>Готово</string>
-      </property>
-     </widget>
-    </item>
-    <item row="5" column="1">
-     <widget class="QPushButton" name="pushButton">
-      <property name="text">
-       <string>Новый штрихкод</string>
-      </property>
-     </widget>
-    </item>
-   </layout>
-  </widget>
-  <widget class="QStatusBar" name="statusbar"/>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item row="6" column="2">
+    <widget class="QPushButton" name="pushButton_2">
+     <property name="text">
+      <string>Готово</string>
+     </property>
+    </widget>
+   </item>
+   <item row="6" column="1">
+    <widget class="QPushButton" name="pushButton">
+     <property name="text">
+      <string>Новый штрихкод</string>
+     </property>
+    </widget>
+   </item>
+  </layout>
  </widget>
  <resources>
   <include location="../../../ui/resources.qrc"/>
