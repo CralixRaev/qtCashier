@@ -1,7 +1,8 @@
 class ABCUiLogic:
     def __init__(self, app):
         self.app = app
-        self.ui = self.app.ui
+        self.ui = app.ui
+        self.config = app.config
 
     def set_opened_classes(self, opened_classes):
         self.opened_classes = opened_classes

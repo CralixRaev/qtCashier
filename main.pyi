@@ -8,6 +8,7 @@ class MainWindow:
         self.ui = Ui_mainWindow()
         self.ui.setupUi(self)
         self.plugin_system = {}
+        self.config = {"product_base_name": None}
 
     def show(self):
         pass

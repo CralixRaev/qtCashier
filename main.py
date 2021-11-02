@@ -6,6 +6,7 @@ from PyQt5 import QtWidgets, QtGui
 import resources_rc
 from ui.design import Ui_mainWindow
 from qt_material import apply_stylesheet
+import json
 
 
 class MainWindow(QtWidgets.QMainWindow):
@@ -16,6 +17,9 @@ class MainWindow(QtWidgets.QMainWindow):
         #   ---------------------------------------------
         #       ЛОГИКА ЗАГРУЗКА МОДУЛЕЙ
         #   ---------------------------------------------
+        # загрузим для начала конфиг
+        with open('config.json', 'r', encoding='utf-8') as f:
+            self.config = json.load(f)
         self.modules = {}
         self.opened_classes = {}
         # я не думаю что мы будем запускаться откуда то кроме самого main.py, поэтому такое

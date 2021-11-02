@@ -9,7 +9,7 @@ from .ui.productListItem import Ui_productListItem
 class UiLogic(ABCUiLogic):
     def __init__(self, app):
         super().__init__(app)
-        self.product_system = ProductSystem()
+        self.product_system = ProductSystem(self.config)
 
         self.init_product_system()
         self.init_ui()
