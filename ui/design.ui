@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1095</width>
-    <height>818</height>
+    <width>1123</width>
+    <height>730</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -54,20 +54,55 @@ font: 12px url(:/fonts/roboto_regular.ttf);
        <bool>true</bool>
       </property>
       <property name="frameShape">
-       <enum>QFrame::Box</enum>
+       <enum>QFrame::NoFrame</enum>
       </property>
       <property name="frameShadow">
        <enum>QFrame::Raised</enum>
+      </property>
+      <property name="lineWidth">
+       <number>2</number>
+      </property>
+      <property name="midLineWidth">
+       <number>0</number>
       </property>
       <property name="currentIndex">
        <number>0</number>
       </property>
       <widget class="QWidget" name="sellPage">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="MinimumExpanding" vsizetype="Preferred">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
        <property name="autoFillBackground">
         <bool>true</bool>
        </property>
-       <layout class="QVBoxLayout" name="verticalLayout">
-        <item>
+       <layout class="QGridLayout" name="gridLayout">
+        <item row="1" column="2">
+         <widget class="QListWidget" name="receiptMainWidget">
+          <property name="minimumSize">
+           <size>
+            <width>600</width>
+            <height>0</height>
+           </size>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="2">
+         <widget class="QPushButton" name="receiptTotal">
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>41</height>
+           </size>
+          </property>
+          <property name="text">
+           <string>Итого</string>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="2">
          <layout class="QHBoxLayout" name="receiptHeaderHorizontalLayout">
           <item>
            <widget class="QPushButton" name="receiptHeaderDelete">
@@ -180,27 +215,62 @@ font: 12px url(:/fonts/roboto_regular.ttf);
           </item>
          </layout>
         </item>
-        <item>
-         <widget class="QListWidget" name="receiptMainWidget">
-          <property name="minimumSize">
-           <size>
-            <width>600</width>
-            <height>0</height>
-           </size>
+        <item row="0" column="0" rowspan="3">
+         <widget class="QTabWidget" name="productsTabWidget">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="MinimumExpanding" vsizetype="Preferred">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
           </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QPushButton" name="receiptTotal">
-          <property name="minimumSize">
-           <size>
-            <width>0</width>
-            <height>41</height>
-           </size>
+          <property name="tabPosition">
+           <enum>QTabWidget::South</enum>
           </property>
-          <property name="text">
-           <string>Итого</string>
+          <property name="tabShape">
+           <enum>QTabWidget::Rounded</enum>
           </property>
+          <property name="currentIndex">
+           <number>0</number>
+          </property>
+          <property name="elideMode">
+           <enum>Qt::ElideNone</enum>
+          </property>
+          <property name="usesScrollButtons">
+           <bool>true</bool>
+          </property>
+          <widget class="QWidget" name="allProductsTab">
+           <attribute name="icon">
+            <iconset resource="resources.qrc">
+             <normaloff>:/icons/list.svg</normaloff>:/icons/list.svg</iconset>
+           </attribute>
+           <attribute name="title">
+            <string>Все товары</string>
+           </attribute>
+           <layout class="QVBoxLayout" name="verticalLayout">
+            <item>
+             <widget class="QLineEdit" name="allProductsSearch">
+              <property name="inputMask">
+               <string/>
+              </property>
+              <property name="placeholderText">
+               <string>Поиск по товарам...</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QListWidget" name="allProductsList"/>
+            </item>
+           </layout>
+          </widget>
+          <widget class="QWidget" name="tab_2">
+           <attribute name="icon">
+            <iconset resource="resources.qrc">
+             <normaloff>:/icons/favorite.svg</normaloff>:/icons/favorite.svg</iconset>
+           </attribute>
+           <attribute name="title">
+            <string>Избранные товары</string>
+           </attribute>
+          </widget>
          </widget>
         </item>
        </layout>
@@ -267,166 +337,12 @@ font: 12px url(:/fonts/roboto_regular.ttf);
     </item>
    </layout>
   </widget>
-  <widget class="QDockWidget" name="productsDock">
-   <property name="sizePolicy">
-    <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-     <horstretch>0</horstretch>
-     <verstretch>0</verstretch>
-    </sizepolicy>
-   </property>
-   <property name="minimumSize">
-    <size>
-     <width>268</width>
-     <height>352</height>
-    </size>
-   </property>
-   <property name="autoFillBackground">
-    <bool>false</bool>
-   </property>
-   <property name="features">
-    <set>QDockWidget::DockWidgetFloatable|QDockWidget::DockWidgetMovable</set>
-   </property>
-   <property name="allowedAreas">
-    <set>Qt::BottomDockWidgetArea|Qt::LeftDockWidgetArea|Qt::RightDockWidgetArea</set>
-   </property>
-   <property name="windowTitle">
-    <string>Все товары</string>
-   </property>
-   <attribute name="dockWidgetArea">
-    <number>1</number>
-   </attribute>
-   <widget class="QWidget" name="productsDockContent">
-    <layout class="QVBoxLayout" name="verticalLayout_2">
-     <item>
-      <layout class="QHBoxLayout" name="productsDockHeaderHorizontalLayout">
-       <item>
-        <widget class="QLineEdit" name="productsDockHeaderSearch">
-         <property name="minimumSize">
-          <size>
-           <width>0</width>
-           <height>41</height>
-          </size>
-         </property>
-         <property name="inputMask">
-          <string comment="Поиск по товарам..."/>
-         </property>
-         <property name="text">
-          <string/>
-         </property>
-         <property name="maxLength">
-          <number>32767</number>
-         </property>
-         <property name="placeholderText">
-          <string>Поиск по товарам...</string>
-         </property>
-        </widget>
-       </item>
-      </layout>
-     </item>
-     <item>
-      <widget class="QStackedWidget" name="productsDockProductsStacked">
-       <property name="currentIndex">
-        <number>0</number>
-       </property>
-       <widget class="QWidget" name="productsDockProductsStackedList">
-        <layout class="QVBoxLayout" name="verticalLayout_3">
-         <item>
-          <widget class="QListWidget" name="productsList">
-           <property name="sizeAdjustPolicy">
-            <enum>QAbstractScrollArea::AdjustToContents</enum>
-           </property>
-          </widget>
-         </item>
-        </layout>
-       </widget>
-       <widget class="QWidget" name="productsDockProductsStackedFavorite">
-        <layout class="QVBoxLayout" name="verticalLayout_4">
-         <item>
-          <widget class="QListWidget" name="favoriteProductsList"/>
-         </item>
-        </layout>
-       </widget>
-      </widget>
-     </item>
-     <item>
-      <layout class="QHBoxLayout" name="productsDockBottomHorizontalLayout">
-       <item>
-        <widget class="QPushButton" name="productsDockBottomFavorite">
-         <property name="minimumSize">
-          <size>
-           <width>0</width>
-           <height>41</height>
-          </size>
-         </property>
-         <property name="maximumSize">
-          <size>
-           <width>16777215</width>
-           <height>41</height>
-          </size>
-         </property>
-         <property name="text">
-          <string>Избранные</string>
-         </property>
-         <property name="icon">
-          <iconset>
-           <normalon>:/icons/favorite.svg</normalon>
-          </iconset>
-         </property>
-         <property name="iconSize">
-          <size>
-           <width>21</width>
-           <height>21</height>
-          </size>
-         </property>
-         <attribute name="buttonGroup">
-          <string notr="true">productsDockType</string>
-         </attribute>
-        </widget>
-       </item>
-       <item>
-        <widget class="QPushButton" name="productsDockBottomList">
-         <property name="minimumSize">
-          <size>
-           <width>0</width>
-           <height>41</height>
-          </size>
-         </property>
-         <property name="maximumSize">
-          <size>
-           <width>16777215</width>
-           <height>41</height>
-          </size>
-         </property>
-         <property name="text">
-          <string>Список</string>
-         </property>
-         <property name="icon">
-          <iconset>
-           <normalon>:/icons/list.svg</normalon>
-          </iconset>
-         </property>
-         <property name="iconSize">
-          <size>
-           <width>21</width>
-           <height>21</height>
-          </size>
-         </property>
-         <attribute name="buttonGroup">
-          <string notr="true">productsDockType</string>
-         </attribute>
-        </widget>
-       </item>
-      </layout>
-     </item>
-    </layout>
-   </widget>
-  </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1095</width>
+     <width>1123</width>
      <height>21</height>
     </rect>
    </property>
@@ -447,25 +363,5 @@ font: 12px url(:/fonts/roboto_regular.ttf);
  <resources>
   <include location="resources.qrc"/>
  </resources>
- <connections>
-  <connection>
-   <sender>productsDockType</sender>
-   <signal>buttonClicked(int)</signal>
-   <receiver>productsDockProductsStacked</receiver>
-   <slot>setCurrentIndex(int)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>-1</x>
-     <y>-1</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>133</x>
-     <y>329</y>
-    </hint>
-   </hints>
-  </connection>
- </connections>
- <buttongroups>
-  <buttongroup name="productsDockType"/>
- </buttongroups>
+ <connections/>
 </ui>

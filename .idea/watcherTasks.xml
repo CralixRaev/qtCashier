@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectTasksOptions">
     <TaskOptions isEnabled="true">
-      <option name="arguments" value="C:\Users\Cralix\Desktop\qtCashier\scripts\generate_ui_files.py" />
+      <option name="arguments" value="&quot;C:\Users\Cralix\Desktop\qtCashier\scripts\generate_ui_files.py&quot;" />
       <option name="checkSyntaxErrors" value="true" />
       <option name="description" />
       <option name="exitCodeBehavior" value="ERROR" />

@@ -14,8 +14,8 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_productListItem(object):
     def setupUi(self, productListItem):
         productListItem.setObjectName("productListItem")
-        productListItem.resize(561, 76)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Preferred)
+        productListItem.resize(568, 82)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Minimum)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(productListItem.sizePolicy().hasHeightForWidth())

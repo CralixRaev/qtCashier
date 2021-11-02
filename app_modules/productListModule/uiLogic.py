@@ -14,12 +14,12 @@ class UiLogic(ABCUiLogic):
         self.init_product_system()
         self.init_ui()
 
-    def _generate_list_item(self, product: Product):
+    def _generate_list_item(self):
         widget = QWidget()
         widget_ui = Ui_productListItem()
         widget_ui.setupUi(widget)
-        widget_ui.productName.setText(product.name)
-        widget_ui.productPrice.setText(str(product.price))
+        widget_ui.productName.setText('test')
+        widget_ui.productPrice.setText(str(200.10))
         return widget
 
     def init_product_system(self):
@@ -27,12 +27,11 @@ class UiLogic(ABCUiLogic):
         print(self.product_system.products)
 
     def init_ui(self):
-        for product in self.product_system.products:
-            item = QListWidgetItem()
-            widget = self._generate_list_item(product)
-            item.setSizeHint(widget.sizeHint())
-            self.ui.productsList.addItem(item)
-            self.ui.productsList.setItemWidget(item, widget)
+        item = QListWidgetItem()
+        widget = self._generate_list_item()
+        item.setSizeHint(widget.size())
+        self.ui.allProductsList.addItem(item)
+        self.ui.allProductsList.setItemWidget(item, widget)
 
     def load(self):
         pass

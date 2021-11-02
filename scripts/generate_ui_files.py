@@ -12,5 +12,5 @@ for address, dirs, files in folder:
                 print(f'Working on {address}/{file}')
                 print(f'Output in: {address}/{".".join(file.split(".")[:-1])}.py')
                 so = os.popen(
-                    f'pyuic5 {address}/{file} -o {address}/{".".join(file.split(".")[:-1])}.py').read()
+                    f'"C:\\Users\\Cralix\\Desktop\\qtCashier\\venv\\Scripts\\pyuic5.exe" {address}/{file} -o {address}/{".".join(file.split(".")[:-1])}.py').read()
                 print(so)

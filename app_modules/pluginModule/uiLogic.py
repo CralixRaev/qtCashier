@@ -30,13 +30,11 @@ class UiLogic(ABCUiLogic):
         # Создаём функции
         def pluginlist_open():
             nonlocal self
-            self.ui.productsDock.hide()
             self.ui.mainStackedWidget.setCurrentWidget(self.ui.settingsPluginsPage)
 
         def pluginlist_close():
             nonlocal self
             self.ui.mainStackedWidget.setCurrentWidget(self.ui.sellPage)
-            self.ui.productsDock.show()
 
         def pluginlist_select(index):
             nonlocal self
