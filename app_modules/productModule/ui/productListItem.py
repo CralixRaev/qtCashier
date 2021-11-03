@@ -53,6 +53,7 @@ class Ui_productListItem(object):
         self.productImage.setMinimumSize(QtCore.QSize(64, 64))
         self.productImage.setMaximumSize(QtCore.QSize(64, 64))
         self.productImage.setText("")
+        self.productImage.setScaledContents(True)
         self.productImage.setObjectName("productImage")
         self.gridLayout.addWidget(self.productImage, 0, 0, 2, 1)
 

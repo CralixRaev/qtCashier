@@ -1,4 +1,5 @@
-from PyQt5.QtWidgets import QListWidgetItem, QWidget
+from PyQt5.QtGui import QPixmap
+from PyQt5.QtWidgets import QListWidgetItem, QWidget, QListWidget
 
 from .classes.product import Product
 from .ui.editForm import EditForm
@@ -19,28 +20,29 @@ class UiLogic(ABCUiLogic):
         self.product_system = ProductSystem(self.config["db_name"])
         self.init_ui()
 
+    def _draw_items(self, list_widget: QListWidget, products: list):
+        for product in products:
+            item = QListWidgetItem()
+            widget = self._generate_list_item(product)
+            item.setSizeHint(widget.size())
+            list_widget.addItem(item)
+            list_widget.setItemWidget(item, widget)
+
     def reload_items(self):
         self.ui.productManageList.clear()
         self.ui.allProductsList.clear()
         self.init_product_system()
-        for product in self.product_system.products:
-            item = QListWidgetItem()
-            widget = self._generate_list_item(product)
-            item.setSizeHint(widget.size())
-            self.ui.allProductsList.addItem(item)
-            self.ui.allProductsList.setItemWidget(item, widget)
-
-        for product in self.product_system.products:
-            item = QListWidgetItem()
-            widget = self._generate_list_item(product)
-            item.setSizeHint(widget.size())
-            self.ui.productManageList.addItem(item)
-            self.ui.productManageList.setItemWidget(item, widget)
+        all_products = self.product_system.products
+        self._draw_items(self.ui.allProductsList, all_products)
+        self._draw_items(self.ui.productManageList, all_products)
 
     def _generate_list_item(self, product: Product):
         widget = ListItem()
         widget.productName.setText(product.name)
         widget.productPrice.setText(str(round(product.price, 2)))
+        pixmap = QPixmap()
+        pixmap.loadFromData(product.image)
+        widget.productImage.setPixmap(pixmap.scaled(64, 64))
         return widget
 
     def init_product_system(self):

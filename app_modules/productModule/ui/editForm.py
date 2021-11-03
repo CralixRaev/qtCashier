@@ -25,6 +25,10 @@ class EditForm(QWidget):
         self.init_ui()
         self.reload_items = reload_items
 
+    def convert_image(self, path: str):
+        with open(path, 'rb') as f:
+            self.blob_picture = f.read()
+
     def init_ui(self):
         def ready_button():
             nonlocal self
@@ -40,10 +44,11 @@ class EditForm(QWidget):
             self.ui.barcodeList.selectedItems()[0].setText(barcode)
 
         def on_file_upload():
-            file_dialog = QFileDialog(self)
-            file_name = file_dialog.getOpenFileName(self, 'Выберите изображение товара',
-                                                   filter="Изображения (*.png *.jpg *.bmp)")[0]
-            print(file_name)
+            file_path = QFileDialog(self).getOpenFileName(self, 'Выберите изображение товара',
+                                                          filter="Изображения (*.png *.jpg *.bmp)")[
+                0]  # <-- вот так мне пайчарм круто перенёс строчку)
+            self.convert_image(file_path)
+            self.reload_image()
 
         # Соединяем сигналы с функциями
         connects = ((self.ui.readyButton.clicked, ready_button),
@@ -54,6 +59,11 @@ class EditForm(QWidget):
         for action, function in connects:
             action.connect(function)
 
+    def reload_image(self):
+        pixmap = QPixmap()
+        pixmap.loadFromData(self.blob_picture)
+        self.ui.imageLabel.setPixmap(pixmap.scaled(256, 256))
+
     def setup_data(self, starting_item):
         if starting_item:
             self.item = self.product_system.get_item_by_name(starting_item.productName.text())
@@ -63,9 +73,8 @@ class EditForm(QWidget):
         self.ui.formNameEdit.setText(name)
         self.ui.formPriceEdit.setValue(price)
         self.ui.formIsFavoriteCheckbox.setChecked(is_favorite or False)
-        pixmap = QPixmap()
-        pixmap.loadFromData(picture)
-        self.ui.imageLabel.setPixmap(pixmap.scaled(256, 256))
+        self.blob_picture = picture
+        self.reload_image()
         self.ui.barcodeList.addItems(self.product_system.get_barcodes_by_product_id(item_id))
 
     def _get_new_values(self) -> tuple:
@@ -78,6 +87,7 @@ class EditForm(QWidget):
 
     def closeEvent(self, a0: QtGui.QCloseEvent) -> None:
         if self.item:
-            self.product_system.edit_by_id(self.item[0], self._get_new_values())
+            self.product_system.update_by_id(self.item[0], self._get_new_values())
+            self.product_system.update_by_id_image(self.item[0], self.blob_picture)
             self.reload_items()
         print('I am about to close')

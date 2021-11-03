@@ -1,4 +1,3 @@
-import json
 from .classes.product import Product
 import sqlite3
 
@@ -29,8 +28,13 @@ class ProductSystem:
                 FROM barcode 
                 WHERE product_id=?""", (product_id,)).fetchmany()
 
-    def edit_by_id(self, item_id: int, new_data: tuple):
+    def update_by_id(self, item_id: int, new_data: tuple):
         cursor = self.connection.cursor()
-        result = cursor.execute("""UPDATE products  SET name = ?,
-        price = ?, picture = ?, is_favorite = ? WHERE id = ?;""", (*new_data, item_id))
+        cursor.execute("""UPDATE products SET name = ?,
+        price=?, picture=?, is_favorite=? WHERE id=?;""", (*new_data, item_id))
+        self.connection.commit()
+
+    def update_by_id_image(self, item_id: int, new_photo: bytes):
+        cursor = self.connection.cursor()
+        cursor.execute("""UPDATE products SET picture=? WHERE id=?;""", (new_photo, item_id))
         self.connection.commit()
