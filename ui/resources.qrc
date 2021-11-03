@@ -1,5 +1,6 @@
 <RCC>
   <qresource>
+    <file>images/no-image.png</file>
     <file>icons/window-icon.svg</file>
     <file>icons/delete.svg</file>
     <file>icons/favorite.svg</file>

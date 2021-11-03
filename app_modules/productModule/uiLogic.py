@@ -17,35 +17,12 @@ class UiLogic(ABCUiLogic):
     def __init__(self, app):
         super().__init__(app)
         self.product_system = ProductSystem(self.config["db_name"])
-        self.init_product_system()
         self.init_ui()
 
-    def _generate_list_item(self, product: Product):
-        widget = ListItem()
-        widget.productName.setText(product.name)
-        widget.productPrice.setText(str(round(product.price, 2)))
-        return widget
-
-    def init_product_system(self):
-        self.product_system.load_all()
-        print(self.product_system.products)
-
-    def init_ui(self):
-
-        def open_edit_dialog(item):
-            nonlocal self
-            widget = self.ui.productManageList.itemWidget(item)
-            self.edit_form = EditForm(widget)
-            self.edit_form.show()
-
-        def productmanage_open():
-            nonlocal self
-            self.ui.mainStackedWidget.setCurrentWidget(self.ui.productManagePage)
-
-        def productmanage_close():
-            nonlocal self
-            self.ui.mainStackedWidget.setCurrentWidget(self.ui.sellPage)
-
+    def reload_items(self):
+        self.ui.productManageList.clear()
+        self.ui.allProductsList.clear()
+        self.init_product_system()
         for product in self.product_system.products:
             item = QListWidgetItem()
             widget = self._generate_list_item(product)
@@ -59,6 +36,34 @@ class UiLogic(ABCUiLogic):
             item.setSizeHint(widget.size())
             self.ui.productManageList.addItem(item)
             self.ui.productManageList.setItemWidget(item, widget)
+
+    def _generate_list_item(self, product: Product):
+        widget = ListItem()
+        widget.productName.setText(product.name)
+        widget.productPrice.setText(str(round(product.price, 2)))
+        return widget
+
+    def init_product_system(self):
+        self.product_system.reload_all()
+        print(self.product_system.products)
+
+    def init_ui(self):
+
+        def open_edit_dialog(item):
+            nonlocal self
+            widget = self.ui.productManageList.itemWidget(item)
+            self.edit_form = EditForm(widget, self.product_system, self.reload_items)
+            self.edit_form.show()
+
+        def productmanage_open():
+            nonlocal self
+            self.ui.mainStackedWidget.setCurrentWidget(self.ui.productManagePage)
+
+        def productmanage_close():
+            nonlocal self
+            self.ui.mainStackedWidget.setCurrentWidget(self.ui.sellPage)
+
+        self.reload_items()
 
         # Соединяем сигналы с функциями
         connects = ((self.ui.productManageList.itemDoubleClicked, open_edit_dialog),

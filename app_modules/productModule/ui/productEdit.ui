@@ -9,8 +9,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>639</width>
-    <height>524</height>
+    <width>632</width>
+    <height>496</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -21,8 +21,106 @@
     <normaloff>:/icons/window-icon.svg</normaloff>:/icons/window-icon.svg</iconset>
   </property>
   <layout class="QGridLayout" name="gridLayout">
-   <item row="1" column="1">
-    <layout class="QFormLayout" name="formLayout">
+   <item row="1" column="3" rowspan="3">
+    <widget class="QLabel" name="imageLabel">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>256</width>
+       <height>256</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>256</width>
+       <height>256</height>
+      </size>
+     </property>
+     <property name="sizeIncrement">
+      <size>
+       <width>256</width>
+       <height>256</height>
+      </size>
+     </property>
+     <property name="baseSize">
+      <size>
+       <width>256</width>
+       <height>256</height>
+      </size>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="pixmap">
+      <pixmap resource="../../../ui/resources.qrc">:/images/no-image.png</pixmap>
+     </property>
+     <property name="scaledContents">
+      <bool>true</bool>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+   </item>
+   <item row="2" column="1">
+    <widget class="QLabel" name="barcodeListEdit">
+     <property name="text">
+      <string>Редактирование штрихкодов:</string>
+     </property>
+    </widget>
+   </item>
+   <item row="6" column="1">
+    <widget class="QPushButton" name="barcodeNewButton">
+     <property name="text">
+      <string>Новый штрихкод</string>
+     </property>
+    </widget>
+   </item>
+   <item row="6" column="3">
+    <widget class="QPushButton" name="readyButton">
+     <property name="text">
+      <string>Готово</string>
+     </property>
+    </widget>
+   </item>
+   <item row="6" column="2">
+    <widget class="QPushButton" name="barcodeRemoveButton">
+     <property name="text">
+      <string>Удалить штрихкод</string>
+     </property>
+    </widget>
+   </item>
+   <item row="4" column="1" colspan="2">
+    <layout class="QFormLayout" name="barcodeEditForm">
+     <item row="0" column="0">
+      <widget class="QLabel" name="barcodeEditLabel">
+       <property name="text">
+        <string>Выбранный штрихкод:</string>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="1">
+      <widget class="QLineEdit" name="barcodeEdit">
+       <property name="text">
+        <string/>
+       </property>
+       <property name="placeholderText">
+        <string>Выберите штрихкод...</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item row="3" column="1" colspan="2">
+    <widget class="QListWidget" name="barcodeList"/>
+   </item>
+   <item row="1" column="1" colspan="2">
+    <layout class="QFormLayout" name="mainInfoForm">
      <property name="fieldGrowthPolicy">
       <enum>QFormLayout::AllNonFixedFieldsGrow</enum>
      </property>
@@ -77,84 +175,27 @@
       </widget>
      </item>
      <item row="1" column="1">
-      <widget class="QDoubleSpinBox" name="formPriceEdit"/>
+      <widget class="QDoubleSpinBox" name="formPriceEdit">
+       <property name="maximum">
+        <double>1000000000000000042420637374017961984.000000000000000</double>
+       </property>
+      </widget>
      </item>
      <item row="3" column="0">
-      <widget class="QLabel" name="label_3">
+      <widget class="QLabel" name="formIsFavoriteLabel">
        <property name="text">
         <string>Товар в избранном?</string>
        </property>
       </widget>
      </item>
      <item row="3" column="1">
-      <widget class="QCheckBox" name="checkBox">
+      <widget class="QCheckBox" name="formIsFavoriteCheckbox">
        <property name="text">
         <string>В избранном</string>
        </property>
       </widget>
      </item>
     </layout>
-   </item>
-   <item row="1" column="2" rowspan="3">
-    <widget class="QLabel" name="imageLabel">
-     <property name="minimumSize">
-      <size>
-       <width>256</width>
-       <height>256</height>
-      </size>
-     </property>
-     <property name="text">
-      <string>Картинка</string>
-     </property>
-    </widget>
-   </item>
-   <item row="2" column="1">
-    <widget class="QLabel" name="label">
-     <property name="text">
-      <string>Редактирование штрихкодов:</string>
-     </property>
-    </widget>
-   </item>
-   <item row="3" column="1">
-    <widget class="QListWidget" name="listWidget">
-     <item>
-      <property name="text">
-       <string>978020137962</string>
-      </property>
-     </item>
-    </widget>
-   </item>
-   <item row="4" column="1">
-    <layout class="QFormLayout" name="formLayout_2">
-     <item row="0" column="0">
-      <widget class="QLabel" name="label_2">
-       <property name="text">
-        <string>Выбранный штрихкод:</string>
-       </property>
-      </widget>
-     </item>
-     <item row="0" column="1">
-      <widget class="QLineEdit" name="lineEdit">
-       <property name="text">
-        <string>978020137962</string>
-       </property>
-      </widget>
-     </item>
-    </layout>
-   </item>
-   <item row="6" column="2">
-    <widget class="QPushButton" name="pushButton_2">
-     <property name="text">
-      <string>Готово</string>
-     </property>
-    </widget>
-   </item>
-   <item row="6" column="1">
-    <widget class="QPushButton" name="pushButton">
-     <property name="text">
-      <string>Новый штрихкод</string>
-     </property>
-    </widget>
    </item>
   </layout>
  </widget>

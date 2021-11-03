@@ -2,7 +2,6 @@ import importlib
 from importlib import resources
 import os
 import json
-import runpy
 
 
 class PluginDescriptionError(Exception):
