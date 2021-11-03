@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1123</width>
-    <height>587</height>
+    <width>1135</width>
+    <height>569</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -276,14 +276,23 @@ font: 12px url(:/fonts/roboto_regular.ttf);
               <property name="sizeAdjustPolicy">
                <enum>QAbstractScrollArea::AdjustToContents</enum>
               </property>
+              <property name="selectionMode">
+               <enum>QAbstractItemView::SingleSelection</enum>
+              </property>
+              <property name="textElideMode">
+               <enum>Qt::ElideLeft</enum>
+              </property>
               <property name="movement">
                <enum>QListView::Free</enum>
+              </property>
+              <property name="resizeMode">
+               <enum>QListView::Adjust</enum>
               </property>
              </widget>
             </item>
            </layout>
           </widget>
-          <widget class="QWidget" name="tab_2">
+          <widget class="QWidget" name="favoriteProductsTab">
            <attribute name="icon">
             <iconset resource="resources.qrc">
              <normaloff>:/icons/favorite.svg</normaloff>:/icons/favorite.svg</iconset>
@@ -291,6 +300,40 @@ font: 12px url(:/fonts/roboto_regular.ttf);
            <attribute name="title">
             <string>Избранные товары</string>
            </attribute>
+           <layout class="QVBoxLayout" name="verticalLayout_2">
+            <item>
+             <widget class="QLineEdit" name="favoriteProductsSearch">
+              <property name="inputMask">
+               <string/>
+              </property>
+              <property name="placeholderText">
+               <string>Поиск по товарам...</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QListWidget" name="favoriteProductsList">
+              <property name="verticalScrollBarPolicy">
+               <enum>Qt::ScrollBarAsNeeded</enum>
+              </property>
+              <property name="sizeAdjustPolicy">
+               <enum>QAbstractScrollArea::AdjustToContents</enum>
+              </property>
+              <property name="selectionMode">
+               <enum>QAbstractItemView::SingleSelection</enum>
+              </property>
+              <property name="textElideMode">
+               <enum>Qt::ElideLeft</enum>
+              </property>
+              <property name="movement">
+               <enum>QListView::Free</enum>
+              </property>
+              <property name="resizeMode">
+               <enum>QListView::Adjust</enum>
+              </property>
+             </widget>
+            </item>
+           </layout>
           </widget>
          </widget>
         </item>
@@ -457,7 +500,7 @@ font: 12px url(:/fonts/roboto_regular.ttf);
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1123</width>
+     <width>1135</width>
      <height>21</height>
     </rect>
    </property>

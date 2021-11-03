@@ -1,3 +1,4 @@
+import io
 import os
 
 from PyQt5 import QtGui
@@ -5,15 +6,29 @@ from PyQt5.QtGui import QPicture, QPixmap
 from PyQt5.QtWidgets import QWidget, QListWidgetItem, QFileDialog
 from ..productSystem import ProductSystem
 from .productEdit import Ui_mainWidget
-from binascii import hexlify
+from PIL import Image
 
 
 # конечно, это было намного удобнее сделать диалогом, но лицей так не хочет, поэтому отдельная
 # формочка, ок
 
+def crop_center(img: Image.Image, crop_width: int, crop_height: int) -> Image:
+    """
+    Функция для обрезки изображения по центру.
+    """
+    img_width, img_height = img.size
+    return img.crop(((img_width - crop_width) // 2,
+                     (img_height - crop_height) // 2,
+                     (img_width + crop_width) // 2,
+                     (img_height + crop_height) // 2))
+
+
+def crop_max_square(img: Image.Image) -> Image:
+    return crop_center(img, min(img.size), min(img.size))
+
 
 class EditForm(QWidget):
-    def __init__(self, clicked_item, product_system, reload_items):
+    def __init__(self, clicked_item, product_system):
         super().__init__()
         self.ui = Ui_mainWidget()
         self.ui.setupUi(self)
@@ -23,11 +38,13 @@ class EditForm(QWidget):
         self.setWindowTitle(f"Редактирование товара | {clicked_item.productName.text()}")
         self.setup_data(clicked_item)
         self.init_ui()
-        self.reload_items = reload_items
 
     def convert_image(self, path: str):
-        with open(path, 'rb') as f:
-            self.blob_picture = f.read()
+        im = Image.open(path)
+        im = crop_max_square(im)
+        stream = io.BytesIO()
+        im.save(stream, format="PNG")
+        self.blob_picture = stream.getvalue()
 
     def init_ui(self):
         def ready_button():
@@ -62,7 +79,7 @@ class EditForm(QWidget):
     def reload_image(self):
         pixmap = QPixmap()
         pixmap.loadFromData(self.blob_picture)
-        self.ui.imageLabel.setPixmap(pixmap.scaled(256, 256))
+        self.ui.imageLabel.setPixmap(pixmap.scaled(1024, 1024))
 
     def setup_data(self, starting_item):
         if starting_item:
@@ -89,5 +106,4 @@ class EditForm(QWidget):
         if self.item:
             self.product_system.update_by_id(self.item[0], self._get_new_values())
             self.product_system.update_by_id_image(self.item[0], self.blob_picture)
-            self.reload_items()
         print('I am about to close')

@@ -1,6 +1,7 @@
 import importlib
 import os
 import sys
+import ctypes
 
 from PyQt5 import QtWidgets, QtGui
 from PyQt5.QtWidgets import QErrorMessage
@@ -41,6 +42,9 @@ class MainWindow(QtWidgets.QMainWindow):
 
 
 if __name__ == "__main__":
+    # хак, что бы сказать что pythonw.exe является
+    # хостом для других приложений (помогает в отрисовке иконки в таскбаре)
+    ctypes.windll.shell32.SetCurrentProcessExplicitAppUserModelID(u'cralix_project.QtCashier.beta.1')
     app = QtWidgets.QApplication(sys.argv)
     apply_stylesheet(app, theme='dark_blue.xml', invert_secondary=False,
                      extra={'font-family': 'Roboto'})

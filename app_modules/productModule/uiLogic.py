@@ -17,8 +17,26 @@ class ListItem(QWidget, Ui_productListItem):
 class UiLogic(ABCUiLogic):
     def __init__(self, app):
         super().__init__(app)
-        self.product_system = ProductSystem(self.config["db_name"])
+        self.product_system = ProductSystem(self.config["db_name"], self.redraw_items)
         self.init_ui()
+
+    def _generate_list_item(self, product: Product):
+
+        widget = ListItem()
+        widget.productName.setText(product.name)
+        widget.productPrice.setText(str(round(product.price, 2)))
+        pixmap = QPixmap()
+        pixmap.loadFromData(product.image)
+        widget.productImage.setPixmap(pixmap.scaled(256, 256))
+
+        def update_favorite():
+            nonlocal widget, self
+            name, is_favorite = widget.productName.text(), widget.favoriteCheckBox.isChecked()
+            self.product_system.update_by_name_favorite(name, is_favorite)
+
+        widget.favoriteCheckBox.setChecked(product.is_favorite)
+        widget.favoriteCheckBox.clicked.connect(update_favorite)
+        return widget
 
     def _draw_items(self, list_widget: QListWidget, products: list):
         for product in products:
@@ -28,33 +46,26 @@ class UiLogic(ABCUiLogic):
             list_widget.addItem(item)
             list_widget.setItemWidget(item, widget)
 
-    def reload_items(self):
+    def redraw_items(self):
+        print('STARTING REDRAW')
         self.ui.productManageList.clear()
         self.ui.allProductsList.clear()
+        self.ui.favoriteProductsList.clear()
         self.init_product_system()
         all_products = self.product_system.products
         self._draw_items(self.ui.allProductsList, all_products)
         self._draw_items(self.ui.productManageList, all_products)
-
-    def _generate_list_item(self, product: Product):
-        widget = ListItem()
-        widget.productName.setText(product.name)
-        widget.productPrice.setText(str(round(product.price, 2)))
-        pixmap = QPixmap()
-        pixmap.loadFromData(product.image)
-        widget.productImage.setPixmap(pixmap.scaled(64, 64))
-        return widget
+        self._draw_items(self.ui.favoriteProductsList, self.product_system.favorite_products)
 
     def init_product_system(self):
         self.product_system.reload_all()
-        print(self.product_system.products)
 
     def init_ui(self):
 
         def open_edit_dialog(item):
             nonlocal self
             widget = self.ui.productManageList.itemWidget(item)
-            self.edit_form = EditForm(widget, self.product_system, self.reload_items)
+            self.edit_form = EditForm(widget, self.product_system)
             self.edit_form.show()
 
         def productmanage_open():
@@ -65,7 +76,7 @@ class UiLogic(ABCUiLogic):
             nonlocal self
             self.ui.mainStackedWidget.setCurrentWidget(self.ui.sellPage)
 
-        self.reload_items()
+        self.redraw_items()
 
         # Соединяем сигналы с функциями
         connects = ((self.ui.productManageList.itemDoubleClicked, open_edit_dialog),

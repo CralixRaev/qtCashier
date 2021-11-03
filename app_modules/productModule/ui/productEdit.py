@@ -15,7 +15,7 @@ class Ui_mainWidget(object):
     def setupUi(self, mainWidget):
         mainWidget.setObjectName("mainWidget")
         mainWidget.setWindowModality(QtCore.Qt.ApplicationModal)
-        mainWidget.resize(632, 496)
+        mainWidget.resize(563, 496)
         icon = QtGui.QIcon()
         icon.addPixmap(QtGui.QPixmap(":/icons/window-icon.svg"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         mainWidget.setWindowIcon(icon)

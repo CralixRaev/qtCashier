@@ -4,17 +4,34 @@ import sqlite3
 
 # честно скажу, хотел это сделать больше похожим на какой-то ORM, но время поджимает и просто сложно
 class ProductSystem:
-    def __init__(self, db_name: str):
+    def __init__(self, db_name: str, redraw_items):
         self.products = []
+        self.favorite_products = []
+        self.redraw_items = redraw_items
         self.connection = sqlite3.connect(db_name)
 
-    def reload_all(self):
+    def fetch_all(self):
         cursor = self.connection.cursor()
         self.products = []
         result = cursor.execute(
             """SELECT id, name, price, picture, is_favorite FROM products""").fetchall()
         for item_id, name, price, picture, is_favorite in result:
             self.products.append(Product(item_id, name, price, picture, is_favorite))
+
+    def fetch_favorite(self):
+        cursor = self.connection.cursor()
+        self.favorite_products = []
+        result = cursor.execute(
+            """SELECT id, name, price, picture, is_favorite 
+            FROM products 
+            WHERE is_favorite=true""").fetchall()
+        for item_id, name, price, picture, is_favorite in result:
+            print(name)
+            self.favorite_products.append(Product(item_id, name, price, picture, is_favorite))
+
+    def reload_all(self):
+        self.fetch_all()
+        self.fetch_favorite()
 
     def get_item_by_name(self, name: str) -> tuple:
         cursor = self.connection.cursor()
@@ -33,8 +50,18 @@ class ProductSystem:
         cursor.execute("""UPDATE products SET name = ?,
         price=?, picture=?, is_favorite=? WHERE id=?;""", (*new_data, item_id))
         self.connection.commit()
+        self.redraw_items()
 
     def update_by_id_image(self, item_id: int, new_photo: bytes):
         cursor = self.connection.cursor()
         cursor.execute("""UPDATE products SET picture=? WHERE id=?;""", (new_photo, item_id))
         self.connection.commit()
+        self.redraw_items()
+
+    def update_by_name_favorite(self, name: str, is_favorite: bool):
+        cursor = self.connection.cursor()
+        print(f'UPDATING {is_favorite}')
+        result = cursor.execute("""UPDATE products SET is_favorite=? WHERE name=?;""",
+                                (is_favorite, name))
+        self.connection.commit()
+        self.redraw_items()
