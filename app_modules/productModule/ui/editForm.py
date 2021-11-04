@@ -85,7 +85,7 @@ class EditForm(QWidget):
         self.ui.imageLabel.setPixmap(pixmap.scaled(1024, 1024))
 
     def setup_data(self, starting_item):
-        item_id, name, price, picture, is_favorite = (None, ) * 5  # костыль
+        item_id, name, price, picture, is_favorite = (None,) * 5  # костыль
         if starting_item:
             self.item = self.product_system.get_item_by_name(starting_item.productName.text())
             item_id, name, price, picture, is_favorite = self.item

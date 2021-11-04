@@ -123,17 +123,41 @@ font: 12px url(:/fonts/roboto_regular.ttf);
               <property name="sizeAdjustPolicy">
                <enum>QAbstractScrollArea::AdjustToContents</enum>
               </property>
+              <property name="editTriggers">
+               <set>QAbstractItemView::NoEditTriggers</set>
+              </property>
+              <property name="showDropIndicator" stdset="0">
+               <bool>false</bool>
+              </property>
+              <property name="dragEnabled">
+               <bool>true</bool>
+              </property>
+              <property name="dragDropMode">
+               <enum>QAbstractItemView::DragOnly</enum>
+              </property>
+              <property name="defaultDropAction">
+               <enum>Qt::IgnoreAction</enum>
+              </property>
               <property name="selectionMode">
                <enum>QAbstractItemView::SingleSelection</enum>
               </property>
+              <property name="selectionBehavior">
+               <enum>QAbstractItemView::SelectItems</enum>
+              </property>
               <property name="textElideMode">
-               <enum>Qt::ElideLeft</enum>
+               <enum>Qt::ElideNone</enum>
               </property>
               <property name="movement">
-               <enum>QListView::Free</enum>
+               <enum>QListView::Snap</enum>
+              </property>
+              <property name="flow">
+               <enum>QListView::TopToBottom</enum>
               </property>
               <property name="resizeMode">
                <enum>QListView::Adjust</enum>
+              </property>
+              <property name="selectionRectVisible">
+               <bool>false</bool>
               </property>
              </widget>
             </item>
@@ -197,7 +221,33 @@ font: 12px url(:/fonts/roboto_regular.ttf);
           </property>
          </widget>
         </item>
-        <item row="1" column="2">
+        <item row="3" column="2">
+         <widget class="QLabel" name="label">
+          <property name="text">
+           <string>Итого: 999 999.00</string>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="0">
+         <widget class="QLineEdit" name="productsSearch">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="inputMask">
+           <string/>
+          </property>
+          <property name="frame">
+           <bool>true</bool>
+          </property>
+          <property name="placeholderText">
+           <string>Поиск по товарам...</string>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="2">
          <layout class="QHBoxLayout" name="receiptHeaderHorizontalLayout">
           <item>
            <widget class="QPushButton" name="receiptHeaderDelete">
@@ -309,32 +359,6 @@ font: 12px url(:/fonts/roboto_regular.ttf);
            </widget>
           </item>
          </layout>
-        </item>
-        <item row="3" column="2">
-         <widget class="QLabel" name="label">
-          <property name="text">
-           <string>Итого: 999 999.00</string>
-          </property>
-         </widget>
-        </item>
-        <item row="0" column="0">
-         <widget class="QLineEdit" name="productsSearch">
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
-          </property>
-          <property name="inputMask">
-           <string/>
-          </property>
-          <property name="frame">
-           <bool>true</bool>
-          </property>
-          <property name="placeholderText">
-           <string>Поиск по товарам...</string>
-          </property>
-         </widget>
         </item>
        </layout>
       </widget>

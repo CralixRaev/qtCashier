@@ -10,21 +10,27 @@ class ProductSystem:
         self.redraw_items = redraw_items
         self.connection = sqlite3.connect(db_name)
 
-    def fetch_all(self):
+    def fetch_all(self, filtering: str):
         cursor = self.connection.cursor()
         self.products = []
+        filtering = f"WHERE {filtering}" if filtering else ""
         result = cursor.execute(
-            """SELECT id, name, price, picture, is_favorite FROM products""").fetchall()
+            """SELECT id, name, price, picture, is_favorite FROM products """ + filtering).fetchall()
         for item_id, name, price, picture, is_favorite in result:
             self.products.append(Product(item_id, name, price, picture, is_favorite))
 
-    def fetch_favorite(self):
+    def fetch_favorite(self, filtering: str):
         cursor = self.connection.cursor()
+        print(filtering)
+        filtering = f"AND {filtering}" if filtering else ""
         self.favorite_products = []
+        print("""SELECT id, name, price, picture, is_favorite 
+            FROM products 
+            WHERE is_favorite=true """ + filtering)
         result = cursor.execute(
             """SELECT id, name, price, picture, is_favorite 
             FROM products 
-            WHERE is_favorite=true""").fetchall()
+            WHERE is_favorite=true """ + filtering).fetchall()
         for item_id, name, price, picture, is_favorite in result:
             print(name)
             self.favorite_products.append(Product(item_id, name, price, picture, is_favorite))
@@ -42,9 +48,10 @@ class ProductSystem:
         self.connection.commit()
         self.redraw_items()
 
-    def reload_all(self):
-        self.fetch_all()
-        self.fetch_favorite()
+    def reload_all(self, filtering):
+        print(filtering)
+        self.fetch_all(filtering)
+        self.fetch_favorite(filtering)
 
     def get_item_by_name(self, name: str) -> tuple:
         cursor = self.connection.cursor()

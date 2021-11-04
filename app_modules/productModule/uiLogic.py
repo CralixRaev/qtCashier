@@ -55,20 +55,20 @@ class UiLogic(ABCUiLogic):
             list_widget.addItem(item)
             list_widget.setItemWidget(item, widget)
 
-    def redraw_items(self):
+    def redraw_items(self, filtering: str = ""):
         print('STARTING REDRAW')
         self.ui.productManageList.clear()
         self.ui.allProductsList.clear()
         self.ui.favoriteProductsList.clear()
-        self.init_product_system()
+        self.init_product_system(filtering)
         all_products = self.product_system.products
         self.search_completer_model.setStringList([product.name for product in all_products])
         self._draw_items(self.ui.allProductsList, all_products)
         self._draw_items(self.ui.productManageList, all_products)
         self._draw_items(self.ui.favoriteProductsList, self.product_system.favorite_products)
 
-    def init_product_system(self):
-        self.product_system.reload_all()
+    def init_product_system(self, filtering: str = ""):
+        self.product_system.reload_all("")
 
     def init_manage_ui(self):
         def get_current_selected_item() -> QListWidgetItem:
@@ -131,7 +131,8 @@ class UiLogic(ABCUiLogic):
 
     def init_sell_ui(self):
         def on_text_change(new_text: str):
-            pass
+            self.redraw_items(filtering=f"LOWER(name) LIKE '%{new_text}%'")
+
         # Соединяем сигналы с функциями
         connects = ((self.ui.productsSearch.textChanged, on_text_change),)
 
