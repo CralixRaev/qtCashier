@@ -34,8 +34,11 @@ class EditForm(QWidget):
         self.ui.setupUi(self)
         self.product_system: ProductSystem = product_system
         self.item: tuple = ()
-        self.blob_picture: bytes = bytes()
-        self.setWindowTitle(f"Редактирование товара | {clicked_item.productName.text()}")
+        self.blob_picture: bytes = bytes
+        self.convert_image(os.path.join(os.getcwd(), 'no-image.png'))
+        self.setWindowTitle(
+            f"Редактирование товара | "
+            f"{clicked_item.productName.text() if clicked_item else 'Новый товар'}")
         self.setup_data(clicked_item)
         self.init_ui()
 
@@ -82,28 +85,30 @@ class EditForm(QWidget):
         self.ui.imageLabel.setPixmap(pixmap.scaled(1024, 1024))
 
     def setup_data(self, starting_item):
+        item_id, name, price, picture, is_favorite = (None, ) * 5  # костыль
         if starting_item:
             self.item = self.product_system.get_item_by_name(starting_item.productName.text())
+            item_id, name, price, picture, is_favorite = self.item
+            self.blob_picture = picture
+            self.ui.barcodeList.addItems(self.product_system.get_barcodes_by_product_id(item_id))
         else:
             self.item = None
-        item_id, name, price, picture, is_favorite = self.item
-        self.ui.formNameEdit.setText(name)
-        self.ui.formPriceEdit.setValue(price)
+        self.ui.formNameEdit.setText(name or 'Новый товар')
+        self.ui.formPriceEdit.setValue(price or 0.00)
         self.ui.formIsFavoriteCheckbox.setChecked(is_favorite or False)
-        self.blob_picture = picture
         self.reload_image()
-        self.ui.barcodeList.addItems(self.product_system.get_barcodes_by_product_id(item_id))
 
     def _get_new_values(self) -> tuple:
         name = self.ui.formNameEdit.text()
         price = self.ui.formPriceEdit.value()
         picture = None
-        print(os.getcwd())
         is_favorite = self.ui.formIsFavoriteCheckbox.isChecked()
-        return name, price, picture, is_favorite
+        return name, price, is_favorite
 
     def closeEvent(self, a0: QtGui.QCloseEvent) -> None:
         if self.item:
             self.product_system.update_by_id(self.item[0], self._get_new_values())
             self.product_system.update_by_id_image(self.item[0], self.blob_picture)
+        else:
+            self.product_system.create_new(self._get_new_values(), self.blob_picture)
         print('I am about to close')

@@ -21,6 +21,7 @@ class Ui_productListItem(object):
         sizePolicy.setHeightForWidth(productListItem.sizePolicy().hasHeightForWidth())
         productListItem.setSizePolicy(sizePolicy)
         productListItem.setMaximumSize(QtCore.QSize(16777215, 16777215))
+        productListItem.setContextMenuPolicy(QtCore.Qt.DefaultContextMenu)
         self.gridLayout = QtWidgets.QGridLayout(productListItem)
         self.gridLayout.setObjectName("gridLayout")
         self.productPrice = QtWidgets.QLabel(productListItem)

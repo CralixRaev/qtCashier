@@ -83,7 +83,98 @@ font: 12px url(:/fonts/roboto_regular.ttf);
         <bool>true</bool>
        </property>
        <layout class="QGridLayout" name="gridLayout">
-        <item row="1" column="2">
+        <item row="1" column="0" rowspan="4">
+         <widget class="QTabWidget" name="productsTabWidget">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="MinimumExpanding" vsizetype="Preferred">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="tabPosition">
+           <enum>QTabWidget::South</enum>
+          </property>
+          <property name="tabShape">
+           <enum>QTabWidget::Rounded</enum>
+          </property>
+          <property name="currentIndex">
+           <number>0</number>
+          </property>
+          <property name="elideMode">
+           <enum>Qt::ElideNone</enum>
+          </property>
+          <property name="usesScrollButtons">
+           <bool>true</bool>
+          </property>
+          <widget class="QWidget" name="allProductsTab">
+           <attribute name="icon">
+            <iconset resource="resources.qrc">
+             <normaloff>:/icons/list.svg</normaloff>:/icons/list.svg</iconset>
+           </attribute>
+           <attribute name="title">
+            <string>Все товары</string>
+           </attribute>
+           <layout class="QVBoxLayout" name="verticalLayout">
+            <item>
+             <widget class="QListWidget" name="allProductsList">
+              <property name="verticalScrollBarPolicy">
+               <enum>Qt::ScrollBarAsNeeded</enum>
+              </property>
+              <property name="sizeAdjustPolicy">
+               <enum>QAbstractScrollArea::AdjustToContents</enum>
+              </property>
+              <property name="selectionMode">
+               <enum>QAbstractItemView::SingleSelection</enum>
+              </property>
+              <property name="textElideMode">
+               <enum>Qt::ElideLeft</enum>
+              </property>
+              <property name="movement">
+               <enum>QListView::Free</enum>
+              </property>
+              <property name="resizeMode">
+               <enum>QListView::Adjust</enum>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </widget>
+          <widget class="QWidget" name="favoriteProductsTab">
+           <attribute name="icon">
+            <iconset resource="resources.qrc">
+             <normaloff>:/icons/favorite.svg</normaloff>:/icons/favorite.svg</iconset>
+           </attribute>
+           <attribute name="title">
+            <string>Избранные товары</string>
+           </attribute>
+           <layout class="QVBoxLayout" name="verticalLayout_2">
+            <item>
+             <widget class="QListWidget" name="favoriteProductsList">
+              <property name="verticalScrollBarPolicy">
+               <enum>Qt::ScrollBarAsNeeded</enum>
+              </property>
+              <property name="sizeAdjustPolicy">
+               <enum>QAbstractScrollArea::AdjustToContents</enum>
+              </property>
+              <property name="selectionMode">
+               <enum>QAbstractItemView::SingleSelection</enum>
+              </property>
+              <property name="textElideMode">
+               <enum>Qt::ElideLeft</enum>
+              </property>
+              <property name="movement">
+               <enum>QListView::Free</enum>
+              </property>
+              <property name="resizeMode">
+               <enum>QListView::Adjust</enum>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </widget>
+         </widget>
+        </item>
+        <item row="2" column="2">
          <widget class="QListWidget" name="receiptMainWidget">
           <property name="minimumSize">
            <size>
@@ -93,7 +184,7 @@ font: 12px url(:/fonts/roboto_regular.ttf);
           </property>
          </widget>
         </item>
-        <item row="3" column="2">
+        <item row="4" column="2">
          <widget class="QPushButton" name="receiptTotal">
           <property name="minimumSize">
            <size>
@@ -106,7 +197,7 @@ font: 12px url(:/fonts/roboto_regular.ttf);
           </property>
          </widget>
         </item>
-        <item row="0" column="2">
+        <item row="1" column="2">
          <layout class="QHBoxLayout" name="receiptHeaderHorizontalLayout">
           <item>
            <widget class="QPushButton" name="receiptHeaderDelete">
@@ -219,122 +310,30 @@ font: 12px url(:/fonts/roboto_regular.ttf);
           </item>
          </layout>
         </item>
-        <item row="2" column="2">
+        <item row="3" column="2">
          <widget class="QLabel" name="label">
           <property name="text">
            <string>Итого: 999 999.00</string>
           </property>
          </widget>
         </item>
-        <item row="0" column="0" rowspan="4">
-         <widget class="QTabWidget" name="productsTabWidget">
+        <item row="0" column="0">
+         <widget class="QLineEdit" name="productsSearch">
           <property name="sizePolicy">
-           <sizepolicy hsizetype="MinimumExpanding" vsizetype="Preferred">
+           <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
             <horstretch>0</horstretch>
             <verstretch>0</verstretch>
            </sizepolicy>
           </property>
-          <property name="tabPosition">
-           <enum>QTabWidget::South</enum>
+          <property name="inputMask">
+           <string/>
           </property>
-          <property name="tabShape">
-           <enum>QTabWidget::Rounded</enum>
-          </property>
-          <property name="currentIndex">
-           <number>0</number>
-          </property>
-          <property name="elideMode">
-           <enum>Qt::ElideNone</enum>
-          </property>
-          <property name="usesScrollButtons">
+          <property name="frame">
            <bool>true</bool>
           </property>
-          <widget class="QWidget" name="allProductsTab">
-           <attribute name="icon">
-            <iconset resource="resources.qrc">
-             <normaloff>:/icons/list.svg</normaloff>:/icons/list.svg</iconset>
-           </attribute>
-           <attribute name="title">
-            <string>Все товары</string>
-           </attribute>
-           <layout class="QVBoxLayout" name="verticalLayout">
-            <item>
-             <widget class="QLineEdit" name="allProductsSearch">
-              <property name="inputMask">
-               <string/>
-              </property>
-              <property name="placeholderText">
-               <string>Поиск по товарам...</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QListWidget" name="allProductsList">
-              <property name="verticalScrollBarPolicy">
-               <enum>Qt::ScrollBarAsNeeded</enum>
-              </property>
-              <property name="sizeAdjustPolicy">
-               <enum>QAbstractScrollArea::AdjustToContents</enum>
-              </property>
-              <property name="selectionMode">
-               <enum>QAbstractItemView::SingleSelection</enum>
-              </property>
-              <property name="textElideMode">
-               <enum>Qt::ElideLeft</enum>
-              </property>
-              <property name="movement">
-               <enum>QListView::Free</enum>
-              </property>
-              <property name="resizeMode">
-               <enum>QListView::Adjust</enum>
-              </property>
-             </widget>
-            </item>
-           </layout>
-          </widget>
-          <widget class="QWidget" name="favoriteProductsTab">
-           <attribute name="icon">
-            <iconset resource="resources.qrc">
-             <normaloff>:/icons/favorite.svg</normaloff>:/icons/favorite.svg</iconset>
-           </attribute>
-           <attribute name="title">
-            <string>Избранные товары</string>
-           </attribute>
-           <layout class="QVBoxLayout" name="verticalLayout_2">
-            <item>
-             <widget class="QLineEdit" name="favoriteProductsSearch">
-              <property name="inputMask">
-               <string/>
-              </property>
-              <property name="placeholderText">
-               <string>Поиск по товарам...</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QListWidget" name="favoriteProductsList">
-              <property name="verticalScrollBarPolicy">
-               <enum>Qt::ScrollBarAsNeeded</enum>
-              </property>
-              <property name="sizeAdjustPolicy">
-               <enum>QAbstractScrollArea::AdjustToContents</enum>
-              </property>
-              <property name="selectionMode">
-               <enum>QAbstractItemView::SingleSelection</enum>
-              </property>
-              <property name="textElideMode">
-               <enum>Qt::ElideLeft</enum>
-              </property>
-              <property name="movement">
-               <enum>QListView::Free</enum>
-              </property>
-              <property name="resizeMode">
-               <enum>QListView::Adjust</enum>
-              </property>
-             </widget>
-            </item>
-           </layout>
-          </widget>
+          <property name="placeholderText">
+           <string>Поиск по товарам...</string>
+          </property>
          </widget>
         </item>
        </layout>
@@ -428,7 +427,14 @@ font: 12px url(:/fonts/roboto_regular.ttf);
          </widget>
         </item>
         <item row="2" column="1" colspan="3">
-         <widget class="QListWidget" name="productManageList"/>
+         <widget class="QListWidget" name="productManageList">
+          <property name="editTriggers">
+           <set>QAbstractItemView::NoEditTriggers</set>
+          </property>
+          <property name="resizeMode">
+           <enum>QListView::Adjust</enum>
+          </property>
+         </widget>
         </item>
         <item row="3" column="3">
          <widget class="QPushButton" name="productManageRemoveProduct">

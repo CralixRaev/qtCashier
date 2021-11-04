@@ -29,6 +29,19 @@ class ProductSystem:
             print(name)
             self.favorite_products.append(Product(item_id, name, price, picture, is_favorite))
 
+    def create_new(self, data: tuple, image: bytes):
+        cursor = self.connection.cursor()
+        cursor.execute("""INSERT INTO products(name, price, is_favorite, picture)
+         VALUES (?, ?, ?, ?)""", (*data, image))
+        self.connection.commit()
+        self.redraw_items()
+
+    def remove_by_name(self, name: str):
+        cursor = self.connection.cursor()
+        cursor.execute("""DELETE FROM products WHERE name=?""", (name,))
+        self.connection.commit()
+        self.redraw_items()
+
     def reload_all(self):
         self.fetch_all()
         self.fetch_favorite()
@@ -48,7 +61,7 @@ class ProductSystem:
     def update_by_id(self, item_id: int, new_data: tuple):
         cursor = self.connection.cursor()
         cursor.execute("""UPDATE products SET name = ?,
-        price=?, picture=?, is_favorite=? WHERE id=?;""", (*new_data, item_id))
+        price=?, is_favorite=? WHERE id=?;""", (*new_data, item_id))
         self.connection.commit()
         self.redraw_items()
 
