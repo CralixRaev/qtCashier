@@ -6,14 +6,20 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>688</width>
-    <height>76</height>
+    <width>499</width>
+    <height>82</height>
    </rect>
+  </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
   </property>
   <property name="maximumSize">
    <size>
     <width>16777215</width>
-    <height>76</height>
+    <height>82</height>
    </size>
   </property>
   <property name="windowTitle">
@@ -41,10 +47,10 @@
       </font>
      </property>
      <property name="text">
-      <string>722 000,00</string>
+      <string>0.0</string>
      </property>
      <property name="alignment">
-      <set>Qt::AlignBottom|Qt::AlignLeading|Qt::AlignLeft</set>
+      <set>Qt::AlignBottom|Qt::AlignRight|Qt::AlignTrailing</set>
      </property>
     </widget>
    </item>
@@ -76,6 +82,12 @@
      </property>
      <property name="text">
       <string/>
+     </property>
+     <property name="pixmap">
+      <pixmap resource="../../../ui/resources.qrc">:/images/no-image.png</pixmap>
+     </property>
+     <property name="scaledContents">
+      <bool>true</bool>
      </property>
     </widget>
    </item>
@@ -209,6 +221,8 @@
    </item>
   </layout>
  </widget>
- <resources/>
+ <resources>
+  <include location="../../../ui/resources.qrc"/>
+ </resources>
  <connections/>
 </ui>

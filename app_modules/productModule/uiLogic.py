@@ -134,7 +134,10 @@ class UiLogic(ABCUiLogic):
             print(f"new_text: {new_text}")
 
         def add_to_receipt(item):
-            print(f"I need to add {item}")
+            nonlocal self
+            receipt_system = self.app.modules["receiptModule"].receipt_system
+            item_widget = self.ui.allProductsList.itemWidget(item)
+            receipt_system.add_product(Product(*self.product_system.get_item_by_name(item_widget.productName.text())))
 
         # Соединяем сигналы с функциями
         connects = ((self.ui.productsSearch.textChanged, on_text_change),
@@ -142,7 +145,6 @@ class UiLogic(ABCUiLogic):
 
         for action, function in connects:
             action.connect(function)
-
 
     def load(self):
         pass

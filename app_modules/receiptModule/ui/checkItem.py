@@ -14,8 +14,13 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_receiptItem(object):
     def setupUi(self, receiptItem):
         receiptItem.setObjectName("receiptItem")
-        receiptItem.resize(688, 76)
-        receiptItem.setMaximumSize(QtCore.QSize(16777215, 76))
+        receiptItem.resize(499, 82)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.MinimumExpanding, QtWidgets.QSizePolicy.MinimumExpanding)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(receiptItem.sizePolicy().hasHeightForWidth())
+        receiptItem.setSizePolicy(sizePolicy)
+        receiptItem.setMaximumSize(QtCore.QSize(16777215, 82))
         self.gridLayout_3 = QtWidgets.QGridLayout(receiptItem)
         self.gridLayout_3.setObjectName("gridLayout_3")
         self.itemTotal = QtWidgets.QLabel(receiptItem)
@@ -25,7 +30,7 @@ class Ui_receiptItem(object):
         font.setFamily("Roboto Black")
         font.setPointSize(12)
         self.itemTotal.setFont(font)
-        self.itemTotal.setAlignment(QtCore.Qt.AlignBottom|QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft)
+        self.itemTotal.setAlignment(QtCore.Qt.AlignBottom|QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing)
         self.itemTotal.setObjectName("itemTotal")
         self.gridLayout_3.addWidget(self.itemTotal, 0, 3, 1, 1)
         self.itemImage = QtWidgets.QLabel(receiptItem)
@@ -34,6 +39,8 @@ class Ui_receiptItem(object):
         self.itemImage.setSizeIncrement(QtCore.QSize(64, 64))
         self.itemImage.setBaseSize(QtCore.QSize(64, 64))
         self.itemImage.setText("")
+        self.itemImage.setPixmap(QtGui.QPixmap(":/images/no-image.png"))
+        self.itemImage.setScaledContents(True)
         self.itemImage.setObjectName("itemImage")
         self.gridLayout_3.addWidget(self.itemImage, 0, 1, 1, 1)
         self.itemId = QtWidgets.QLabel(receiptItem)
@@ -103,9 +110,10 @@ class Ui_receiptItem(object):
     def retranslateUi(self, receiptItem):
         _translate = QtCore.QCoreApplication.translate
         receiptItem.setWindowTitle(_translate("receiptItem", "Form"))
-        self.itemTotal.setText(_translate("receiptItem", "722 000,00"))
+        self.itemTotal.setText(_translate("receiptItem", "0.0"))
         self.itemId.setText(_translate("receiptItem", "0."))
         self.itemName.setText(_translate("receiptItem", "Очень-очень длинное название товара ведь длинные названия это хорошо ;)"))
         self.itemPricesQuantity.setText(_translate("receiptItem", "999"))
         self.itemPricesSeparator.setText(_translate("receiptItem", "x"))
         self.iremPricesPrice.setText(_translate("receiptItem", "722 000,00"))
+import resources_rc

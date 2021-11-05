@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1135</width>
+    <width>1024</width>
     <height>569</height>
    </rect>
   </property>
@@ -15,6 +15,12 @@
     <horstretch>0</horstretch>
     <verstretch>0</verstretch>
    </sizepolicy>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>1024</width>
+    <height>0</height>
+   </size>
   </property>
   <property name="contextMenuPolicy">
    <enum>Qt::DefaultContextMenu</enum>
@@ -200,6 +206,12 @@ font: 12px url(:/fonts/roboto_regular.ttf);
         </item>
         <item row="2" column="2">
          <widget class="QListWidget" name="receiptMainWidget">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
           <property name="minimumSize">
            <size>
             <width>600</width>
@@ -222,9 +234,9 @@ font: 12px url(:/fonts/roboto_regular.ttf);
          </widget>
         </item>
         <item row="3" column="2">
-         <widget class="QLabel" name="label">
+         <widget class="QLabel" name="receiptTotalLabel">
           <property name="text">
-           <string>Итого: 999 999.00</string>
+           <string>Итого: 0.0</string>
           </property>
          </widget>
         </item>
@@ -530,7 +542,7 @@ font: 12px url(:/fonts/roboto_regular.ttf);
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1135</width>
+     <width>1024</width>
      <height>21</height>
     </rect>
    </property>
@@ -538,20 +550,71 @@ font: 12px url(:/fonts/roboto_regular.ttf);
     <property name="title">
      <string>Настройки</string>
     </property>
+    <widget class="QMenu" name="settingsThemeChooser">
+     <property name="title">
+      <string>Выбор темы</string>
+     </property>
+     <addaction name="darkTheme"/>
+     <addaction name="lightTheme"/>
+    </widget>
     <addaction name="settingsPlugins"/>
     <addaction name="separator"/>
-    <addaction name="productManage"/>
+    <addaction name="settingsThemeChooser"/>
    </widget>
+   <widget class="QMenu" name="menu">
+    <property name="title">
+     <string>Управление магазином</string>
+    </property>
+    <addaction name="productManage"/>
+    <addaction name="receiptHistory"/>
+   </widget>
+   <addaction name="menu"/>
    <addaction name="settingsMenu"/>
   </widget>
   <action name="settingsPlugins">
    <property name="text">
     <string>Плагины</string>
    </property>
+   <property name="menuRole">
+    <enum>QAction::PreferencesRole</enum>
+   </property>
   </action>
   <action name="productManage">
    <property name="text">
     <string>Управление товарами</string>
+   </property>
+  </action>
+  <action name="receiptHistory">
+   <property name="text">
+    <string>История чеков</string>
+   </property>
+  </action>
+  <action name="darkTheme">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="checked">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Тёмная</string>
+   </property>
+   <property name="shortcutContext">
+    <enum>Qt::WindowShortcut</enum>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::PreferencesRole</enum>
+   </property>
+  </action>
+  <action name="lightTheme">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Светлая</string>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::PreferencesRole</enum>
    </property>
   </action>
  </widget>
