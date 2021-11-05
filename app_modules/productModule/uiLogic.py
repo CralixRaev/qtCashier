@@ -60,15 +60,15 @@ class UiLogic(ABCUiLogic):
         self.ui.productManageList.clear()
         self.ui.allProductsList.clear()
         self.ui.favoriteProductsList.clear()
-        self.init_product_system(filtering)
+        self.init_product_system()
         all_products = self.product_system.products
         self.search_completer_model.setStringList([product.name for product in all_products])
         self._draw_items(self.ui.allProductsList, all_products)
         self._draw_items(self.ui.productManageList, all_products)
         self._draw_items(self.ui.favoriteProductsList, self.product_system.favorite_products)
 
-    def init_product_system(self, filtering: str = ""):
-        self.product_system.reload_all("")
+    def init_product_system(self):
+        self.product_system.reload_all()
 
     def init_manage_ui(self):
         def get_current_selected_item() -> QListWidgetItem:
@@ -131,10 +131,14 @@ class UiLogic(ABCUiLogic):
 
     def init_sell_ui(self):
         def on_text_change(new_text: str):
-            self.redraw_items(filtering=f"LOWER(name) LIKE '%{new_text}%'")
+            print(f"new_text: {new_text}")
+
+        def add_to_receipt(item):
+            print(f"I need to add {item}")
 
         # Соединяем сигналы с функциями
-        connects = ((self.ui.productsSearch.textChanged, on_text_change),)
+        connects = ((self.ui.productsSearch.textChanged, on_text_change),
+                    (self.ui.allProductsList.itemDoubleClicked, add_to_receipt))
 
         for action, function in connects:
             action.connect(function)
