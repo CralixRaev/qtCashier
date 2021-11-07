@@ -33,6 +33,8 @@ class PluginSystem:
         # os.chdir('plugins')
         path = os.getcwd()
         for plugin in os.listdir(os.path.join(path, 'plugins')):
+            if plugin == 'stubs':
+                continue
             description = _check_plugin(plugin)
 
             try:
@@ -59,4 +61,4 @@ class PluginSystem:
 
     def load_plugin(self, name, data):
         importlib.invalidate_caches()
-        self.plugins[name] = [importlib.import_module(f'plugins.{name}.main'), data]
+        self.plugins[name] = [importlib.import_module(f'plugins.{name}.run'), data]

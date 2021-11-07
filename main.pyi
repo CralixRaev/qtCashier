@@ -1,7 +1,10 @@
+from PyQt5 import QtWidgets
+from qt_material import QtStyleTools
+
 from ui.design import Ui_mainWindow
 
 
-class MainWindow:
+class MainWindow(QtWidgets.QMainWindow, QtStyleTools):
     def __init__(self):
         self.opened_elems = {}
         self.modules = {}

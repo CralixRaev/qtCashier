@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>1024</width>
-    <height>569</height>
+    <height>560</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -123,47 +123,20 @@ font: 12px url(:/fonts/roboto_regular.ttf);
            <layout class="QVBoxLayout" name="verticalLayout">
             <item>
              <widget class="QListWidget" name="allProductsList">
-              <property name="verticalScrollBarPolicy">
-               <enum>Qt::ScrollBarAsNeeded</enum>
-              </property>
-              <property name="sizeAdjustPolicy">
-               <enum>QAbstractScrollArea::AdjustToContents</enum>
-              </property>
               <property name="editTriggers">
                <set>QAbstractItemView::NoEditTriggers</set>
               </property>
               <property name="showDropIndicator" stdset="0">
                <bool>false</bool>
               </property>
-              <property name="dragEnabled">
-               <bool>true</bool>
-              </property>
-              <property name="dragDropMode">
-               <enum>QAbstractItemView::DragOnly</enum>
-              </property>
               <property name="defaultDropAction">
                <enum>Qt::IgnoreAction</enum>
-              </property>
-              <property name="selectionMode">
-               <enum>QAbstractItemView::SingleSelection</enum>
-              </property>
-              <property name="selectionBehavior">
-               <enum>QAbstractItemView::SelectItems</enum>
-              </property>
-              <property name="textElideMode">
-               <enum>Qt::ElideNone</enum>
-              </property>
-              <property name="movement">
-               <enum>QListView::Snap</enum>
-              </property>
-              <property name="flow">
-               <enum>QListView::TopToBottom</enum>
               </property>
               <property name="resizeMode">
                <enum>QListView::Adjust</enum>
               </property>
-              <property name="selectionRectVisible">
-               <bool>false</bool>
+              <property name="layoutMode">
+               <enum>QListView::Batched</enum>
               </property>
              </widget>
             </item>
@@ -180,23 +153,20 @@ font: 12px url(:/fonts/roboto_regular.ttf);
            <layout class="QVBoxLayout" name="verticalLayout_2">
             <item>
              <widget class="QListWidget" name="favoriteProductsList">
-              <property name="verticalScrollBarPolicy">
-               <enum>Qt::ScrollBarAsNeeded</enum>
+              <property name="editTriggers">
+               <set>QAbstractItemView::NoEditTriggers</set>
               </property>
-              <property name="sizeAdjustPolicy">
-               <enum>QAbstractScrollArea::AdjustToContents</enum>
+              <property name="showDropIndicator" stdset="0">
+               <bool>false</bool>
               </property>
-              <property name="selectionMode">
-               <enum>QAbstractItemView::SingleSelection</enum>
-              </property>
-              <property name="textElideMode">
-               <enum>Qt::ElideLeft</enum>
-              </property>
-              <property name="movement">
-               <enum>QListView::Free</enum>
+              <property name="defaultDropAction">
+               <enum>Qt::IgnoreAction</enum>
               </property>
               <property name="resizeMode">
                <enum>QListView::Adjust</enum>
+              </property>
+              <property name="layoutMode">
+               <enum>QListView::Batched</enum>
               </property>
              </widget>
             </item>
@@ -490,46 +460,69 @@ font: 12px url(:/fonts/roboto_regular.ttf);
       </widget>
       <widget class="QWidget" name="receiptListPage">
        <layout class="QGridLayout" name="gridLayout_4">
-        <item row="3" column="0" colspan="2">
-         <widget class="QListWidget" name="listWidget"/>
-        </item>
-        <item row="4" column="1">
-         <widget class="QPushButton" name="pushButton">
+        <property name="bottomMargin">
+         <number>10</number>
+        </property>
+        <item row="3" column="1">
+         <widget class="QPushButton" name="receiptListSearch">
           <property name="text">
-           <string>Экспорт чеков в CSV</string>
+           <string>Найти</string>
           </property>
          </widget>
         </item>
-        <item row="0" column="0">
-         <widget class="QLabel" name="label_2">
+        <item row="4" column="0" colspan="2">
+         <widget class="QListWidget" name="receiptList">
+          <property name="editTriggers">
+           <set>QAbstractItemView::NoEditTriggers</set>
+          </property>
+          <property name="defaultDropAction">
+           <enum>Qt::IgnoreAction</enum>
+          </property>
+          <property name="verticalScrollMode">
+           <enum>QAbstractItemView::ScrollPerPixel</enum>
+          </property>
+          <property name="horizontalScrollMode">
+           <enum>QAbstractItemView::ScrollPerPixel</enum>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="0">
+         <widget class="QLabel" name="receiptListLabel">
           <property name="text">
            <string>Все пробитые чеки:</string>
           </property>
          </widget>
         </item>
-        <item row="1" column="0" colspan="2">
-         <layout class="QFormLayout" name="formLayout">
-          <item row="0" column="1">
-           <widget class="QDateTimeEdit" name="dateTimeEdit"/>
-          </item>
-          <item row="1" column="1">
-           <widget class="QDateTimeEdit" name="dateTimeEdit_2"/>
-          </item>
+        <item row="2" column="0" colspan="2">
+         <layout class="QFormLayout" name="receiptListForm">
           <item row="0" column="0">
-           <widget class="QLabel" name="label_3">
+           <widget class="QLabel" name="receiptListFormFromLabel">
             <property name="text">
              <string>С даты/времени:</string>
             </property>
            </widget>
           </item>
+          <item row="0" column="1">
+           <widget class="QDateTimeEdit" name="receiptListFormFrom"/>
+          </item>
           <item row="1" column="0">
-           <widget class="QLabel" name="label_4">
+           <widget class="QLabel" name="receiptListFormToLabel">
             <property name="text">
              <string>До даты/времени:</string>
             </property>
            </widget>
           </item>
+          <item row="1" column="1">
+           <widget class="QDateTimeEdit" name="receiptListFormTo"/>
+          </item>
          </layout>
+        </item>
+        <item row="0" column="0">
+         <widget class="QPushButton" name="receiptListBackButton">
+          <property name="text">
+           <string>Назад</string>
+          </property>
+         </widget>
         </item>
        </layout>
       </widget>
@@ -594,7 +587,7 @@ font: 12px url(:/fonts/roboto_regular.ttf);
     <bool>true</bool>
    </property>
    <property name="checked">
-    <bool>true</bool>
+    <bool>false</bool>
    </property>
    <property name="text">
     <string>Тёмная</string>
@@ -615,6 +608,11 @@ font: 12px url(:/fonts/roboto_regular.ttf);
    </property>
    <property name="menuRole">
     <enum>QAction::PreferencesRole</enum>
+   </property>
+  </action>
+  <action name="action">
+   <property name="text">
+    <string>Все настройки</string>
    </property>
   </action>
  </widget>

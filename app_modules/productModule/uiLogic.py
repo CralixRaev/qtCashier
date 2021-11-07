@@ -87,6 +87,7 @@ class UiLogic(ABCUiLogic):
             else:
                 widget = None
             self.edit_form = EditForm(widget, self.product_system)
+            self.edit_form.setStyleSheet(self.app.styleSheet())
             self.edit_form.show()
 
         def productmanage_open():
@@ -136,12 +137,14 @@ class UiLogic(ABCUiLogic):
         def add_to_receipt(item):
             nonlocal self
             receipt_system = self.app.modules["receiptModule"].receipt_system
-            item_widget = self.ui.allProductsList.itemWidget(item)
-            receipt_system.add_product(Product(*self.product_system.get_item_by_name(item_widget.productName.text())))
+            item_widget = self.app.sender().itemWidget(item)
+            receipt_system.add_product(
+                Product(*self.product_system.get_item_by_name(item_widget.productName.text())))
 
         # Соединяем сигналы с функциями
         connects = ((self.ui.productsSearch.textChanged, on_text_change),
-                    (self.ui.allProductsList.itemDoubleClicked, add_to_receipt))
+                    (self.ui.allProductsList.itemDoubleClicked, add_to_receipt),
+                    (self.ui.favoriteProductsList.itemDoubleClicked, add_to_receipt))
 
         for action, function in connects:
             action.connect(function)

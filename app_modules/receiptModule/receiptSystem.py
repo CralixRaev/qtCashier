@@ -7,9 +7,11 @@ from receiptModule.classes.receipt import Receipt
 
 
 class ReceiptSystem:
-    def __init__(self, db_name: str, redraw_receipt):
+    def __init__(self, db_name: str, redraw_receipt, redraw_all_receipts):
+        self.receipts = []
         self.current_receipt = Receipt()
         self.redraw_receipt = redraw_receipt
+        self.redraw_all_receipts = redraw_all_receipts
         self.connection = sqlite3.connect(db_name)
 
     def add_product(self, product: Product):
@@ -24,6 +26,7 @@ class ReceiptSystem:
 
     def clear(self):
         self.current_receipt = Receipt()
+        self.receipts = []
         self.redraw_receipt()
 
     def save_to_db(self):
@@ -39,6 +42,50 @@ class ReceiptSystem:
              self.current_receipt.products])
         self.connection.commit()
         self.clear()
+
+    def fetch_all(self):
+        self.receipts = []
+        cursor = self.connection.cursor()
+        receipts = cursor.execute("""SELECT * FROM cheque ORDER BY datetime DESC""").fetchall()
+        for item_id, is_returned, date_time, comment in receipts:
+            result = cursor.execute("""SELECT p.id, p.name, p.price, p.picture, p.is_favorite, c.quantity
+            FROM cheque_products c
+            LEFT JOIN products p on p.id = c.product_id
+            WHERE cheque_id = ?""", (item_id,)).fetchall()
+            products = [
+                ReceiptProduct(*product) if product[0] else ReceiptProduct(None, "Удалённый товар")
+                for product in result]
+            self.receipts.append(
+                Receipt(is_returned, datetime.datetime.strptime(date_time, "%Y-%m-%d %H:%M:%S.%f"),
+                        comment, products, item_id))
+
+    def fetch_by_date(self, from_date: datetime.datetime, to_date: datetime.datetime):
+        self.receipts = []
+        cursor = self.connection.cursor()
+        receipts = cursor.execute("""SELECT * 
+        FROM cheque 
+        WHERE datetime BETWEEN ? AND ? 
+        ORDER BY datetime DESC""", (from_date, to_date)).fetchall()
+        for item_id, is_returned, date_time, comment in receipts:
+            result = cursor.execute("""SELECT p.id, p.name, p.price, p.picture, p.is_favorite, c.quantity
+            FROM cheque_products c
+            LEFT JOIN products p on p.id = c.product_id
+            WHERE cheque_id = ? """, (item_id,)).fetchall()
+            products = [
+                ReceiptProduct(*product) if product[0] else ReceiptProduct(None, "Удалённый товар")
+                for product in result]
+            self.receipts.append(
+                Receipt(is_returned, datetime.datetime.strptime(date_time, "%Y-%m-%d %H:%M:%S.%f"),
+                        comment, products, item_id))
+
+    def find_from_to_dates_receipts(self):
+        return min(self.receipts, key=lambda x: x.date_time).date_time, \
+               max(self.receipts, key=lambda x: x.date_time).date_time
+
+    def return_by_id(self, item_id: str):
+        cursor = self.connection.cursor()
+        cursor.execute("""UPDATE cheque SET is_refunded=TRUE WHERE id = ?""", (item_id,))
+        self.connection.commit()
 
     def set_comment(self, comment: str):
         self.current_receipt.comment = comment
