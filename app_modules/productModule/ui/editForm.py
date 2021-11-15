@@ -35,7 +35,7 @@ class EditForm(QWidget):
         self.product_system: ProductSystem = product_system
         self.item: tuple = ()
         self.blob_picture: bytes = bytes
-        self.convert_image(os.path.join(os.getcwd(), 'no-image.png'))
+        # self.convert_image(os.path.join(os.getcwd(), 'no-image.png'))
         self.setWindowTitle(
             f"Редактирование товара | "
             f"{clicked_item.productName.text() if clicked_item else 'Новый товар'}")
@@ -75,7 +75,8 @@ class EditForm(QWidget):
             file_path = QFileDialog(self).getOpenFileName(self, 'Выберите изображение товара',
                                                           filter="Изображения (*.png *.jpg *.bmp)")[
                 0]  # <-- вот так мне пайчарм круто перенёс строчку)
-            self.convert_image(file_path)
+            if file_path:
+                self.convert_image(file_path)
             self.reload_image()
 
         # Соединяем сигналы с функциями

@@ -1,0 +1,7 @@
+{
+  "name": "Плагин экспорта чеков",
+  "description": "Данный плагин позволяет экспортировать чеки в csv",
+  "author": "Cralix",
+  "version": "0.1",
+  "enabled": true
+}

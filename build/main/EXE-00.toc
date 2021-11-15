@@ -1,5 +1,5 @@
 ('C:\\Users\\Cralix\\Desktop\\qtCashier\\build\\main\\qtcashier.exe',
- True,
+ False,
  False,
  True,
  './ui/icons/window-icon.ico',
@@ -56,7 +56,7 @@
  [],
  False,
  False,
- 1636989029,
- [('run.exe',
-   'c:\\users\\cralix\\desktop\\qtcashier\\venv\\lib\\site-packages\\PyInstaller\\bootloader\\Windows-64bit\\run.exe',
+ 1637003265,
+ [('runw.exe',
+   'c:\\users\\cralix\\desktop\\qtcashier\\venv\\lib\\site-packages\\PyInstaller\\bootloader\\Windows-64bit\\runw.exe',
    'EXECUTABLE')])
