@@ -1,7 +1,7 @@
 import importlib
-from importlib import resources
 import os
 import json
+from importlib import resources
 
 
 class PluginDescriptionError(Exception):
