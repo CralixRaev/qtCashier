@@ -18,6 +18,15 @@ class ProductSystem:
         for item_id, name, price, picture, is_favorite in result:
             self.products.append(Product(item_id, name, price, picture, is_favorite))
 
+    def fetch_filtered(self, name: str):
+        cursor = self.connection.cursor()
+        self.products = []
+        result = cursor.execute(
+            f"""SELECT id, name, price, picture, is_favorite FROM products 
+            WHERE name GLOB ?""", (f'*{name}*',)).fetchall()
+        for item_id, name, price, picture, is_favorite in result:
+            self.products.append(Product(item_id, name, price, picture, is_favorite))
+
     def fetch_favorite(self):
         cursor = self.connection.cursor()
         self.favorite_products = []
@@ -26,7 +35,6 @@ class ProductSystem:
             FROM products 
             WHERE is_favorite=true""").fetchall()
         for item_id, name, price, picture, is_favorite in result:
-            print(name)
             self.favorite_products.append(Product(item_id, name, price, picture, is_favorite))
 
     def create_new(self, data: tuple, image: bytes):
@@ -84,3 +92,7 @@ class ProductSystem:
         cursor.executemany("""INSERT OR REPLACE INTO barcode(barcode, product_id)
          VALUES (?, ?)""", [(barcode, product_id) for barcode in barcodes])
         self.connection.commit()
+
+    def delete_by_barcode_barcode(self, barcode: str):
+        cursor = self.connection.cursor()
+        cursor.execute("""DELETE FROM barcode WHERE barcode=?""", (barcode,))

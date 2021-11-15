@@ -35,7 +35,7 @@ class EditForm(QWidget):
         self.product_system: ProductSystem = product_system
         self.item: tuple = ()
         self.blob_picture: bytes = bytes
-        # self.convert_image(os.path.join(os.getcwd(), 'no-image.png'))
+        self.convert_image(os.path.join(os.getcwd(), 'no-image.png'))
         self.setWindowTitle(
             f"Редактирование товара | "
             f"{clicked_item.productName.text() if clicked_item else 'Новый товар'}")
@@ -71,6 +71,14 @@ class EditForm(QWidget):
             nonlocal self
             self.ui.barcodeList.addItem("Введите штрихкод")
 
+        def on_barcode_delete():
+            nonlocal self
+            self.product_system.delete_by_barcode_barcode(
+                self.ui.barcodeList.selectedItems()[0].text())
+            self.ui.barcodeEdit.clear()
+            self.ui.barcodeList.takeItem(
+                self.ui.barcodeList.row(self.ui.barcodeList.selectedItems()[0]))
+
         def on_file_upload():
             file_path = QFileDialog(self).getOpenFileName(self, 'Выберите изображение товара',
                                                           filter="Изображения (*.png *.jpg *.bmp)")[
@@ -83,6 +91,7 @@ class EditForm(QWidget):
         connects = ((self.ui.readyButton.clicked, ready_button),
                     (self.ui.barcodeList.itemSelectionChanged, on_barcode_select),
                     (self.ui.barcodeEdit.textEdited, on_barcode_edit),
+                    (self.ui.barcodeRemoveButton.clicked, on_barcode_delete),
                     (self.ui.formUploadImage.clicked, on_file_upload),
                     (self.ui.barcodeNewButton.clicked, add_barcode))
 

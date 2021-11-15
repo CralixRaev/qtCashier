@@ -90,6 +90,9 @@ class ReceiptSystem:
                 Receipt(is_returned, datetime.datetime.strptime(date_time, "%Y-%m-%d %H:%M:%S.%f"),
                         comment, products, item_id))
 
+    def get_by_id(self):
+        pass
+
     def find_from_to_dates_receipts(self):
         return min(self.receipts, key=lambda x: x.date_time).date_time, \
                max(self.receipts, key=lambda x: x.date_time).date_time

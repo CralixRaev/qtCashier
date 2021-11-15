@@ -56,7 +56,6 @@ class UiLogic(ABCUiLogic):
             list_widget.setItemWidget(item, widget)
 
     def redraw_items(self, filtering: str = ""):
-        print('STARTING REDRAW')
         self.ui.productManageList.clear()
         self.ui.allProductsList.clear()
         self.ui.favoriteProductsList.clear()
@@ -132,7 +131,18 @@ class UiLogic(ABCUiLogic):
 
     def init_sell_ui(self):
         def on_text_change(new_text: str):
-            print(f"new_text: {new_text}")
+            if len(new_text) > 3:
+                self.ui.allProductsList.clear()
+                self.ui.favoriteProductsList.clear()
+                self.product_system.fetch_filtered(new_text)
+                self._draw_items(self.ui.allProductsList, self.product_system.products)
+                self._draw_items(self.ui.favoriteProductsList, self.product_system.products)
+            else:
+                self.ui.allProductsList.clear()
+                self.ui.favoriteProductsList.clear()
+                self.product_system.fetch_all()
+                self._draw_items(self.ui.allProductsList, self.product_system.products)
+                self._draw_items(self.ui.favoriteProductsList, self.product_system.favorite_products)
 
         def add_to_receipt(item):
             nonlocal self
