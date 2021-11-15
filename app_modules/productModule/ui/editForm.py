@@ -54,14 +54,22 @@ class EditForm(QWidget):
             nonlocal self
             self.close()
 
-        def on_barcode_select(item: QListWidgetItem):
+        def on_barcode_select():
             nonlocal self
-            self.ui.barcodeEdit.setText(item.text())
+            if len(self.ui.barcodeList.selectedItems()) != 0:
+                self.ui.barcodeEdit.setDisabled(False)
+                self.ui.barcodeEdit.setText(self.ui.barcodeList.selectedItems()[0].text())
+            else:
+                self.ui.barcodeEdit.setDisabled(True)
 
         def on_barcode_edit(barcode: str):
             # будто реактивные данные реализовал)
             nonlocal self
             self.ui.barcodeList.selectedItems()[0].setText(barcode)
+
+        def add_barcode():
+            nonlocal self
+            self.ui.barcodeList.addItem("Введите штрихкод")
 
         def on_file_upload():
             file_path = QFileDialog(self).getOpenFileName(self, 'Выберите изображение товара',
@@ -72,9 +80,10 @@ class EditForm(QWidget):
 
         # Соединяем сигналы с функциями
         connects = ((self.ui.readyButton.clicked, ready_button),
-                    (self.ui.barcodeList.itemClicked, on_barcode_select),
+                    (self.ui.barcodeList.itemSelectionChanged, on_barcode_select),
                     (self.ui.barcodeEdit.textEdited, on_barcode_edit),
-                    (self.ui.formUploadImage.clicked, on_file_upload))
+                    (self.ui.formUploadImage.clicked, on_file_upload),
+                    (self.ui.barcodeNewButton.clicked, add_barcode))
 
         for action, function in connects:
             action.connect(function)
@@ -85,7 +94,7 @@ class EditForm(QWidget):
         self.ui.imageLabel.setPixmap(pixmap.scaled(1024, 1024))
 
     def setup_data(self, starting_item):
-        item_id, name, price, picture, is_favorite = (None,) * 5  # костыль
+        item_id, name, price, picture, is_favorite = (None,) * 5  # TODO: костыль, переделать
         if starting_item:
             self.item = self.product_system.get_item_by_name(starting_item.productName.text())
             item_id, name, price, picture, is_favorite = self.item
@@ -93,6 +102,7 @@ class EditForm(QWidget):
             self.ui.barcodeList.addItems(self.product_system.get_barcodes_by_product_id(item_id))
         else:
             self.item = None
+        self.ui.barcodeEdit.setDisabled(True)
         self.ui.formNameEdit.setText(name or 'Новый товар')
         self.ui.formPriceEdit.setValue(price or 0.00)
         self.ui.formIsFavoriteCheckbox.setChecked(is_favorite or False)
@@ -109,6 +119,9 @@ class EditForm(QWidget):
         if self.item:
             self.product_system.update_by_id(self.item[0], self._get_new_values())
             self.product_system.update_by_id_image(self.item[0], self.blob_picture)
+            self.product_system.update_insert_by_id_barcodes(self.item[0],
+                                                             [self.ui.barcodeList.item(index).text()
+                                                              for index in
+                                                              range(self.ui.barcodeList.count())])
         else:
             self.product_system.create_new(self._get_new_values(), self.blob_picture)
-        print('I am about to close')

@@ -50,7 +50,7 @@ class Ui_Form(object):
 
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
-        Form.setWindowTitle(_translate("Form", "Form"))
+        Form.setWindowTitle(_translate("Form", "Оплата чека"))
         self.totalButton.setText(_translate("Form", "Пробить чек"))
         self.receiveLabel.setText(_translate("Form", "Получено денег от покупателя:"))
         self.receiveEdit.setPlaceholderText(_translate("Form", "999 999 руб."))

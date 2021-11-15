@@ -11,11 +11,12 @@ from receiptModule.ui.moneyEdit import Ui_Form
 
 
 class EditForm(QWidget):
-    def __init__(self, receipt_system: ReceiptSystem):
+    def __init__(self, receipt_system: ReceiptSystem, signals):
         super().__init__()
         self.ui = Ui_Form()
         self.ui.setupUi(self)
         self.receipt_system = receipt_system
+        self.signals = signals
         self.setup_data()
         self.init_ui()
         self.setWindowTitle(f"Итого: {receipt_system.current_receipt.total}")

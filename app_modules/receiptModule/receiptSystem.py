@@ -7,12 +7,13 @@ from receiptModule.classes.receipt import Receipt
 
 
 class ReceiptSystem:
-    def __init__(self, db_name: str, redraw_receipt, redraw_all_receipts):
+    def __init__(self, db_name: str, redraw_receipt, redraw_all_receipts, signals):
         self.receipts = []
         self.current_receipt = Receipt()
         self.redraw_receipt = redraw_receipt
         self.redraw_all_receipts = redraw_all_receipts
         self.connection = sqlite3.connect(db_name)
+        self.signals = signals
 
     def add_product(self, product: Product):
         list_of_ids = [receipt_product.item_id for receipt_product in self.current_receipt.products]
@@ -22,6 +23,7 @@ class ReceiptSystem:
             self.current_receipt.products.append(
                 ReceiptProduct(product.item_id, product.name, product.price, product.image,
                                product.is_favorite, 1))
+        self.signals.new_position.emit(product.__dict__)
         self.redraw_receipt()
 
     def clear(self):
@@ -34,13 +36,14 @@ class ReceiptSystem:
         result = cursor.execute(
             "INSERT INTO cheque(is_refunded, datetime, comment) VALUES (FALSE, ?, ?)",
             (datetime.datetime.now(), self.current_receipt.comment))
-        print(cursor.lastrowid)
+        self.current_receipt.item_id = result.lastrowid
         cursor.executemany(
             "INSERT INTO cheque_products(cheque_id, product_id, quantity) VALUES "
             "(?, (SELECT id FROM products WHERE name=?), ?)",
             [(cursor.lastrowid, product.name, product.quantity) for product in
              self.current_receipt.products])
         self.connection.commit()
+        self.signals.on_receipt.emit(self.current_receipt.__dict__)
         self.clear()
 
     def fetch_all(self):

@@ -9,8 +9,6 @@ class UiLogic(ABCUiLogic):
         super().__init__(app)
         self.plugin_system = PluginSystem(self.app)
 
-        self.init_pluginsystem()
-
     def init_pluginsystem(self):
         """
         ИНИЦИАЛИЗАЦИЯ ПЛАГИН СИСТЕМЫ
@@ -26,7 +24,6 @@ class UiLogic(ABCUiLogic):
         self.ui.settingsPluginsList.setModel(self.model)
         # Добавляем страницу с плагинами в stacked widget
         self.ui.mainStackedWidget.addWidget(self.ui.settingsPluginsPage)
-
         # Создаём функции
         def pluginlist_open():
             nonlocal self
@@ -59,8 +56,6 @@ class UiLogic(ABCUiLogic):
         for action, function in connects:
             action.connect(function)
 
-    def get_opened_classes(self):
-        return {'pluginSystem': self.plugin_system}
-
     def load(self):
+        self.init_pluginsystem()
         self.init_ui()

@@ -1,14 +1,15 @@
 import datetime
 
+from PyQt5.QtCore import pyqtSignal, QObject
 from PyQt5.QtGui import QPixmap, QColor
 from PyQt5.QtWidgets import QListWidgetItem, QWidget, QListWidget, QInputDialog, QMessageBox
 
-from productModule.classes.product import Product
 from .classes.product import ReceiptProduct
 from .classes.receipt import Receipt
 from .receiptSystem import ReceiptSystem
+from .ui.productForm import ProductForm
 from .ui.receiptItem import Ui_Form
-from ..ABC.uiLogic import ABCUiLogic
+from app_modules.ABC.uiLogic import ABCUiLogic
 from .ui.checkItem import Ui_receiptItem
 from .ui.moneyForm import EditForm
 
@@ -25,12 +26,19 @@ class AllReceiptsItem(QWidget, Ui_Form):
         self.setupUi(self)
 
 
+class Signals(QObject):
+    new_position = pyqtSignal(dict)
+    on_receipt = pyqtSignal(dict)
+    on_return = pyqtSignal(QWidget)
+
+
 class UiLogic(ABCUiLogic):
     def __init__(self, app):
         super().__init__(app)
+        self.signals = Signals()
         self.receipt_system = ReceiptSystem(self.config["db_name"],
                                             self.redraw_current_receipt_items,
-                                            self.redraw_all_receipts_items)
+                                            self.redraw_all_receipts_items, self.signals)
 
     def _generate_receipt_item(self, i: int, product: ReceiptProduct):
         widget = ReceiptItem()
@@ -134,6 +142,7 @@ class UiLogic(ABCUiLogic):
                     self.receipt_system.return_by_id(widget.idEdit.text())
                     widget.setDisabled(True)
                     widget.idEdit.setText(f'{widget.idEdit.text()} (ВОЗВРАТ)')
+                    self.signals.on_return.emit(widget)
 
         # Соединяем сигналы с функциями
         connects = ((self.ui.receiptHistory.triggered, change_page_to_manage),
@@ -171,13 +180,22 @@ class UiLogic(ABCUiLogic):
         def save_receipt():
             nonlocal self
             if self.receipt_system.current_receipt.products:
-                self.money_form = EditForm(self.receipt_system)
+                self.money_form = EditForm(self.receipt_system, self.signals)
                 self.money_form.setStyleSheet(self.app.styleSheet())
                 self.money_form.show()
 
+        def edit_product(item):
+            nonlocal self
+            product = self.receipt_system.current_receipt.products[
+                self.ui.receiptMainWidget.indexFromItem(item).row()]
+            self.product_form = ProductForm(self.receipt_system, product)
+            self.product_form.setStyleSheet(self.app.styleSheet())
+            self.product_form.show()
+
         connects = ((self.ui.receiptHeaderDelete.clicked, clear_receipt),
                     (self.ui.receiptHeaderDescription.clicked, set_comment),
-                    (self.ui.receiptTotal.clicked, save_receipt))
+                    (self.ui.receiptTotal.clicked, save_receipt,),
+                    (self.ui.receiptMainWidget.itemDoubleClicked, edit_product))
 
         for action, function in connects:
             action.connect(function)

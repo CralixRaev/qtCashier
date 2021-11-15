@@ -42,18 +42,18 @@ class PluginSystem:
             except ImportError as e:
                 raise ImportError(
                     f'Не получилось загрузить {plugin} - необработанное исключение: {e}')
+            if description['enabled']:
+                try:
+                    run_func = getattr(self.plugins[plugin][0], 'run')
+                except KeyError:
+                    raise AttributeError(
+                        f'Не получилось запустить {plugin} - у {plugin} нет run функции')
 
-            try:
-                run_func = getattr(self.plugins[plugin][0], 'run')
-            except AttributeError:
-                raise AttributeError(
-                    f'Не получилось запустить {plugin} - у {plugin} нет run функции')
-
-            try:
-                run_func(self.application)
-            except Exception as e:
-                raise PluginRunException(
-                    f'Не получилось запустить {plugin} - необработанное исключение: {e}')
+                try:
+                    run_func(self.application)
+                except Exception as e:
+                    raise PluginRunException(
+                        f'Не получилось запустить {plugin} - необработанное исключение: {e}')
 
     def reload_plugin(self, plugin):
         self.plugins[plugin.__name__.split('.')[1]][0] = importlib.reload(plugin)

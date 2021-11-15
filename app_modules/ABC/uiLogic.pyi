@@ -1,3 +1,5 @@
+from PyQt5.QtCore import QObject
+
 from main import MainWindow
 
 class ABCUiLogic:
@@ -6,3 +8,6 @@ class ABCUiLogic:
         self.ui = app.ui
         self.config = app.config
         ...
+
+class ABCSignals(QObject):
+    pass

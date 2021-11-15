@@ -54,9 +54,9 @@ class ProductSystem:
 
     def get_barcodes_by_product_id(self, product_id: int) -> list:
         cursor = self.connection.cursor()
-        return cursor.execute("""SELECT id, barcode, product_id
+        return [barcode[0] for barcode in cursor.execute("""SELECT barcode
                 FROM barcode 
-                WHERE product_id=?""", (product_id,)).fetchmany()
+                WHERE product_id=?""", (product_id,)).fetchmany()]
 
     def update_by_id(self, item_id: int, new_data: tuple):
         cursor = self.connection.cursor()
@@ -78,3 +78,9 @@ class ProductSystem:
                                 (is_favorite, name))
         self.connection.commit()
         self.redraw_items()
+
+    def update_insert_by_id_barcodes(self, product_id: int, barcodes: list[str]):
+        cursor = self.connection.cursor()
+        cursor.executemany("""INSERT OR REPLACE INTO barcode(barcode, product_id)
+         VALUES (?, ?)""", [(barcode, product_id) for barcode in barcodes])
+        self.connection.commit()
